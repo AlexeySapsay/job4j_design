@@ -1,4 +1,4 @@
-package ru.job4j.it;
+package ru.job4j.iterator;
 
 public class ArrayForWalking {
     public static void main(String[] args) {
