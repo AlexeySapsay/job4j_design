@@ -13,12 +13,14 @@ import java.util.Objects;
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] objArray;
     public final int length;
-    private int size;
+    public int size = size();
+    //public int size;
 
     // class constructor
     public SimpleArray(int length) {
         this.length = length;
         objArray = new Object[length];
+        //this.size = size();
     }
 
     /**
@@ -89,6 +91,25 @@ public class SimpleArray<T> implements Iterable<T> {
         return (T) objArray[index];
     }
 
+    public int size() throws NullPointerException {
+        int sizeArray = 0;
+        //for (int i = 0; i < Objects.requireNonNull(objArray).length; i++) {
+        try {
+            if (objArray.length != 0) {
+                for (int i = 0; i < (objArray).length; i++) {
+                    if (objArray[i] == null) {
+                        continue;
+                    } else {
+                        sizeArray++;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("method size receive a zero length objArray");
+        }
+        return sizeArray;
+    }
+
     /**
      * Также, реализуйте интерфейс Iterable<T> - метод iterator()
      * возвращает итератор, предназначенный для обхода данной структуры.
@@ -146,5 +167,14 @@ public class SimpleArray<T> implements Iterable<T> {
     @Override
     public String toString() {
         return Arrays.toString(objArray);
+    }
+
+    public static void main(String[] args) {
+        //SimpleArray<String> st = new SimpleArray<>(3);
+        String[] st = new String[3];
+        System.out.println(st.toString());
+        for (int i = 0; i < st.length; i++) {
+            System.out.println(st[i]);
+        }
     }
 }
