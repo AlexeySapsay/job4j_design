@@ -25,14 +25,11 @@ public class SimpleArrayTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void addWhenPlaceNotExistThenIndexOutOfBoundsException() {
-        SimpleArray<Integer> result = new SimpleArray<>(2);
-        result.set(0, 0);
-        result.set(1, 1);
-
         SimpleArray<Integer> expected = new SimpleArray<>(2);
-        expected.set(0, 0);
-        expected.set(1, 1);
         expected.add(2);
+        expected.add(2);
+        expected.add(2);
+
     }
 
     @Test
@@ -58,14 +55,14 @@ public class SimpleArrayTest {
     @Test
     public void removeWhenIndexExistThenRemove() {
         SimpleArray<Integer> result = new SimpleArray<>(3);
-        result.set(0, 0);
-        result.set(1, 1);
-        result.set(2, 2);
-        result.remove(0);
+        result.add(0);
+        result.add(1);
+        result.add(2);
+        result.remove(1);
 
         SimpleArray<Integer> expected = new SimpleArray<>(2);
-        expected.set(0, 1);
-        expected.set(1, 2);
+        expected.add(1);
+        expected.add(2);
         assertTrue(result.get(0).equals(1));
     }
 

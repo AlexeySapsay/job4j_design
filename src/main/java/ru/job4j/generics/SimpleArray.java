@@ -1,9 +1,6 @@
 package ru.job4j.generics;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * SimpleArray is an implementation of not dynamic ArrayList
@@ -12,15 +9,13 @@ import java.util.Objects;
  */
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] objArray;
-    public final int length;
-    public int size = size();
-    //public int size;
+    private int size;
+    private int counter = 0;
 
     // class constructor
-    public SimpleArray(int length) {
-        this.length = length;
-        objArray = new Object[length];
-        //this.size = size();
+    public SimpleArray(int size) {
+        this.size = size;
+        objArray = new Object[size];
     }
 
     /**
@@ -29,22 +24,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param model
      */
     public void add(T model) {
-        if (objArray.length == size) {
-            throw new IndexOutOfBoundsException();
-        } else {
-            // looking for an empty baket for element
-            // by iterator or algorithm?
-            int isEmptyBaket = 0;
-            while (isEmptyBaket < objArray.length
-                    && objArray[isEmptyBaket] != null) {
-                isEmptyBaket++;
-            }
-            if (objArray[isEmptyBaket] != null) {
-                throw new IndexOutOfBoundsException();
-            }
-            objArray[isEmptyBaket] = model;
-            size++;
-        }
+        objArray[counter++] = model;
     }
 
     /**
@@ -55,7 +35,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @throws IndexOutOfBoundsException
      */
     public void set(int index, T model) throws IndexOutOfBoundsException {
-        Objects.checkIndex(index, objArray.length);
+        Objects.checkIndex(index, size);
         objArray[index] = model;
     }
 
@@ -68,15 +48,10 @@ public class SimpleArray<T> implements Iterable<T> {
      * @throws IndexOutOfBoundsException
      */
     public void remove(int index) throws IndexOutOfBoundsException {
-        Objects.checkIndex(index, objArray.length);
-
-        Object[] objArrayBuff1 = Arrays.copyOf(objArray, index);
-        Object[] objArrayBuff2 = Arrays.copyOfRange(objArray, index + 1, length);
-        Object[] resultArray = Arrays.copyOf(objArrayBuff1,
-                objArrayBuff1.length + objArrayBuff2.length);
-        System.arraycopy(objArrayBuff2, 0, resultArray,
-                objArrayBuff1.length, objArrayBuff2.length);
-        objArray = resultArray;
+        Objects.checkIndex(index, size);
+        System.arraycopy(objArray, index, objArray,
+                index - 1, size - index - 1);
+        counter--;
     }
 
     /**
@@ -87,28 +62,13 @@ public class SimpleArray<T> implements Iterable<T> {
      * @throws IndexOutOfBoundsException
      */
     public T get(int index) throws IndexOutOfBoundsException {
-        Objects.checkIndex(index, objArray.length);
+        Objects.checkIndex(index, size);
         return (T) objArray[index];
     }
 
-    public int size() throws NullPointerException {
-        int sizeArray = 0;
-        //for (int i = 0; i < Objects.requireNonNull(objArray).length; i++) {
-        try {
-            if (objArray.length != 0) {
-                for (int i = 0; i < (objArray).length; i++) {
-                    if (objArray[i] == null) {
-                        continue;
-                    } else {
-                        sizeArray++;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("method size receive a zero length objArray");
-        }
-        return sizeArray;
-    }
+//    public int size() {
+//        return counter;
+//    }
 
     /**
      * Также, реализуйте интерфейс Iterable<T> - метод iterator()
@@ -126,7 +86,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return valueIteration < length;
+                return valueIteration < counter;
             }
 
             @Override
@@ -151,30 +111,26 @@ public class SimpleArray<T> implements Iterable<T> {
 
         SimpleArray<?> that = (SimpleArray<?>) o;
 
-        if (length != that.length) {
+        if (size != that.size) {
             return false;
         }
+        if (counter != that.counter) {
+            return false;
+        }
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
         return Arrays.equals(objArray, that.objArray);
     }
 
     @Override
     public int hashCode() {
         int result = Arrays.hashCode(objArray);
-        result = 31 * result + length;
+        result = 31 * result + size;
+        result = 31 * result + counter;
         return result;
     }
 
     @Override
     public String toString() {
         return Arrays.toString(objArray);
-    }
-
-    public static void main(String[] args) {
-        //SimpleArray<String> st = new SimpleArray<>(3);
-        String[] st = new String[3];
-        System.out.println(st.toString());
-        for (int i = 0; i < st.length; i++) {
-            System.out.println(st[i]);
-        }
     }
 }
