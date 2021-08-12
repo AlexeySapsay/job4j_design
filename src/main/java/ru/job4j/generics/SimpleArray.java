@@ -9,13 +9,11 @@ import java.util.*;
  */
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] objArray;
-    private int size;
     private int counter = 0;
 
     // class constructor
-    public SimpleArray(int size) {
-        this.size = size;
-        objArray = new Object[size];
+    public SimpleArray(int counter) {
+        this.objArray = new Object[counter];
     }
 
     /**
@@ -31,11 +29,11 @@ public class SimpleArray<T> implements Iterable<T> {
      * Set an element to the specific position in the array where
      *
      * @param index index of position
-     * @param model lement to set
+     * @param model element to set
      * @throws IndexOutOfBoundsException
      */
     public void set(int index, T model) throws IndexOutOfBoundsException {
-        Objects.checkIndex(index, size);
+        Objects.checkIndex(index, counter);
         objArray[index] = model;
     }
 
@@ -48,9 +46,10 @@ public class SimpleArray<T> implements Iterable<T> {
      * @throws IndexOutOfBoundsException
      */
     public void remove(int index) throws IndexOutOfBoundsException {
-        Objects.checkIndex(index, size);
+        Objects.checkIndex(index, counter);
         System.arraycopy(objArray, index, objArray,
-                index - 1, size - index - 1);
+                index - 1, counter - index - 1);
+        objArray[index] = null;
         counter--;
     }
 
@@ -62,13 +61,9 @@ public class SimpleArray<T> implements Iterable<T> {
      * @throws IndexOutOfBoundsException
      */
     public T get(int index) throws IndexOutOfBoundsException {
-        Objects.checkIndex(index, size);
+        Objects.checkIndex(index, counter);
         return (T) objArray[index];
     }
-
-//    public int size() {
-//        return counter;
-//    }
 
     /**
      * Также, реализуйте интерфейс Iterable<T> - метод iterator()
@@ -100,6 +95,7 @@ public class SimpleArray<T> implements Iterable<T> {
         return new SimpleArrayIterator();
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -111,9 +107,6 @@ public class SimpleArray<T> implements Iterable<T> {
 
         SimpleArray<?> that = (SimpleArray<?>) o;
 
-        if (size != that.size) {
-            return false;
-        }
         if (counter != that.counter) {
             return false;
         }
@@ -124,7 +117,6 @@ public class SimpleArray<T> implements Iterable<T> {
     @Override
     public int hashCode() {
         int result = Arrays.hashCode(objArray);
-        result = 31 * result + size;
         result = 31 * result + counter;
         return result;
     }

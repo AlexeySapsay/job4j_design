@@ -6,7 +6,6 @@ import java.util.Iterator;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-
 import static org.junit.Assert.*;
 
 public class SimpleArrayTest {
@@ -29,18 +28,20 @@ public class SimpleArrayTest {
         expected.add(2);
         expected.add(2);
         expected.add(2);
-
     }
 
     @Test
     public void set2ValueWhenIndexExistThenSet() {
         SimpleArray<Integer> result = new SimpleArray<>(2);
-        result.set(0, 1);
-        result.set(1, 1);
+        result.add(1);
+        result.add(1);
+
+        result.set(0, 2);
+        result.set(1, 2);
 
         SimpleArray<Integer> arrayExpected = new SimpleArray<>(2);
-        arrayExpected.set(0, 1);
-        arrayExpected.set(1, 1);
+        arrayExpected.add(2);
+        arrayExpected.add(2);
 
         assertEquals(arrayExpected, result);
     }
@@ -83,10 +84,16 @@ public class SimpleArrayTest {
     @Test
     public void getWhenIndexExistThenGet() {
         SimpleArray<Integer> result = new SimpleArray<>(2);
+        result.add(0);
+        result.add(0);
+
         result.set(0, 0);
         result.set(1, 1);
 
         SimpleArray<Integer> expected = new SimpleArray<>(2);
+        expected.add(0);
+        expected.add(0);
+
         expected.set(0, 0);
         expected.set(1, 1);
 
