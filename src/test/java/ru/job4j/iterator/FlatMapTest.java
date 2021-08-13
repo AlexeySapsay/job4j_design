@@ -13,6 +13,7 @@ import java.util.NoSuchElementException;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FlatMapTest {
+
     @Test
     public void whenDiffNext() {
         Iterator<Iterator<Integer>> data = List.of(
