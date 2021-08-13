@@ -47,9 +47,16 @@ public class SimpleArray<T> implements Iterable<T> {
      */
     public void remove(int index) throws IndexOutOfBoundsException {
         Objects.checkIndex(index, counter);
-        System.arraycopy(objArray, index, objArray,
-                index - 1, counter - index - 1);
-        objArray[index] = null;
+        // закоменченный код демонстрирует утечку памяти, не удалять
+        // оставить как пример для демонстрации
+
+//        System.arraycopy(objArray, index + 1, objArray,
+//                index, objArray.length - index - 1);
+        //objArray[index] = null;
+
+        System.arraycopy(objArray, index + 1, objArray,
+                index, objArray.length - index - 1);
+        objArray[objArray.length - index - 1] = null;
         counter--;
     }
 
@@ -125,4 +132,18 @@ public class SimpleArray<T> implements Iterable<T> {
     public String toString() {
         return Arrays.toString(objArray);
     }
+
+    // демонстрация утечки памяти
+    //https://job4j.ru/profile/exercise/39/task-view/277
+//    public static void main(String[] args) {
+//        var list = new SimpleArray<Integer>(10);
+//        for (var i = 1; i <= 10; i++) {
+//            list.add(i);
+//        }
+//        System.out.println(list);
+//        for (var i = 0; i < 10; i++) {
+//            list.remove(0);
+//        }
+//        System.out.println(list);
+//    }
 }

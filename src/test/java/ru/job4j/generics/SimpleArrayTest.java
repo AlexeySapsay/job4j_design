@@ -59,7 +59,7 @@ public class SimpleArrayTest {
         result.add(0);
         result.add(1);
         result.add(2);
-        result.remove(1);
+        result.remove(0);
 
         SimpleArray<Integer> expected = new SimpleArray<>(2);
         expected.add(1);
