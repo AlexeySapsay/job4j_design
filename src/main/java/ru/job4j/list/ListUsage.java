@@ -13,6 +13,7 @@ import java.util.List;
 
 //https://job4j.ru/profile/exercise/4/task-view/279
 
+
 public class ListUsage {
     public static void main(String[] args) {
         List<String> rsl = new ArrayList<>();
