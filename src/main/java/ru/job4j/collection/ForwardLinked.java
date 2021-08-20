@@ -31,6 +31,10 @@ public class ForwardLinked<T> implements Iterable<T> {
         tail.next = node;
     }
 
+    /**
+     * Удаляем первую ноду из списка
+     * @return новая текущая первая нода после удаления
+     */
     public T deleteFirst() {
         if (head == null) {
             throw new NoSuchElementException();
@@ -40,6 +44,10 @@ public class ForwardLinked<T> implements Iterable<T> {
         return headFirst;
     }
 
+    /**
+     * Итератор для обхода коллекции
+     * @return Iterator возвращается в качестве значения
+     */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
@@ -62,7 +70,10 @@ public class ForwardLinked<T> implements Iterable<T> {
         };
     }
 
-
+    /**
+     * Вложенный класс формирующий Node- узел
+     * @param <T> тип данных, хранимый в узле
+     */
     private static class Node<T> {
         T value;
         Node<T> next;
