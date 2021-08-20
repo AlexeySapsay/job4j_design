@@ -12,7 +12,6 @@ import java.util.*;
 
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] objArray;
-    private Object[] objArrayBuffer;
     private int counter = 0;
     private int modCount = 0;
     private int expectedModCount = 0;
@@ -30,7 +29,6 @@ public class SimpleArray<T> implements Iterable<T> {
      *
      * @param index индекс элемента для извлечения из коллекции
      * @return возвращаемый элемент
-     * @throws IndexOutOfBoundsException
      */
     public T get(int index) {
         Objects.checkIndex(index, counter);
@@ -44,7 +42,7 @@ public class SimpleArray<T> implements Iterable<T> {
      */
     public void add(T model) {
         if (objArray.length <= counter) {
-            objArrayBuffer = Arrays.copyOf(objArray, objArray.length * 2);
+            objArray = Arrays.copyOf(objArray, objArray.length * 2);
         }
         objArray[counter++] = model;
         modCount += 1;
@@ -55,10 +53,6 @@ public class SimpleArray<T> implements Iterable<T> {
      *
      * @param index индекс, позиция для вставки
      * @param model элемент для вставки
-     * @throws IndexOutOfBoundsException выбрасывается исключение,
-     *                                   когда индекс выходи за допустимые границы,
-     *                                   в пределах существующих и добавленных
-     *                                   элементов
      */
     public void set(int index, T model) {
         Objects.checkIndex(index, counter);
@@ -75,7 +69,6 @@ public class SimpleArray<T> implements Iterable<T> {
      * предотвращая утечку памяти.
      *
      * @param index индекс удаляемого элемента
-     * @throws IndexOutOfBoundsException
      */
     public void remove(int index) {
         Objects.checkIndex(index, counter);
