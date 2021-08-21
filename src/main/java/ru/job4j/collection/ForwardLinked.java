@@ -76,6 +76,28 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     /**
+     * Переворачивает односвязный список из 123 в 321
+     * @return true- в случае успешного реверска, и false
+     * в случае провала
+     */
+    public boolean revert() {
+        if (isEmpty() || lengthCounter == 1) {
+            return false;
+        }
+        Node<T> current = head; // current Node
+        Node<T> previous = null; // previous Node
+
+        while (current != null) {
+            Node<T> next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        head = previous;
+        return true;
+    }
+
+    /**
      * Итератор для обхода коллекции
      *
      * @return Iterator возвращается в качестве значения
