@@ -28,4 +28,12 @@ public class SimpleStack<T> {
     public void push(T value) {
         linked.addFirst(value);
     }
+
+    /**
+     * Метод size() возвращает количество элементов в SimpleStack
+     * @return
+     */
+    public int size() {
+        return linked.size();
+    }
 }
