@@ -40,4 +40,13 @@ public class ForwardLinkedTest {
         Iterator<Integer> rsl = linked.iterator();
         assertThat(rsl.next(), is(1));
     }
+
+    @Test
+    public void whenMultiDelete2() {
+        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        linked.add(1);
+        linked.add(2);
+        assertThat(linked.deleteFirst(), is(1));
+        assertThat(linked.deleteFirst(), is(2));
+    }
 }
