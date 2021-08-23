@@ -38,9 +38,5 @@ public class UsageSet {
         for (String s : strings) {
             System.out.println("Текущий элемент: " + s);
         }
-
-
-
     }
-
 }
