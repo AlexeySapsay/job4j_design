@@ -3,6 +3,7 @@ package ru.job4j.collection.set;
 import ru.job4j.collection.SimpleArray;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * Модель Set - SimpleSet, для работы с коллекциями имплеминтирующие
@@ -22,6 +23,10 @@ public class SimpleSet<T> implements Set<T> {
      * в наборе данных. Если уже такой элемент имеется в коллекции
      * - метод вернет false и набор данных при этом не изменится.
      * Равенство объектов определяется по методу equals()
+     * <p>
+     * П.с. Т.к в set может хранится null значение, то для корректного
+     * сравнения объектов предпочтительнее
+     * использовать Objects.equals() вместо Object.equals()
      *
      * @param value добавляемое значение
      * @return true если элемента в колекции нет и он
@@ -30,40 +35,9 @@ public class SimpleSet<T> implements Set<T> {
      */
     @Override
     public boolean add(T value) {
-        //int containsFlag = 0;
-//        Iterator<T> iterator = set.iterator();
-//        while (iterator.hasNext()) {
-//            if (iterator.next() == value) {
-//                return false;
-//            }
-//        }
-
-
-//        if (contains((T) set)) {
-//            //true
-//            return false;
-//        }
-//        //false
-//        set.add(value);
-//        return true;
-
-
-//        if (contains((T) set)) {
-//            return false;
-//            //return true;
-//        }
-//        set.add(value);
-//        //return false;
-//        return true;
-
-
-        if (contains((T) set)) {
-            // contains = true,
-            // add= false
+        if (contains(value)) {
             return false;
         }
-        // contains = false,
-        // add = true
         set.add(value);
         return true;
     }
@@ -71,6 +45,10 @@ public class SimpleSet<T> implements Set<T> {
     /**
      * метод возвращает true, если множество содержит переданный в
      * метод элемент e. Сравнение объектов выполняется с помощью метода equals().
+     *
+     * П.с. В set может хранится null значение, то для корректного
+     * сравнения объектов предпочтительнее
+     * использовать Objects.equals() вместо Object.equals()
      *
      * @param value искомое значение
      * @return true если множество содержит искомый элемент. И false в
@@ -80,16 +58,10 @@ public class SimpleSet<T> implements Set<T> {
     public boolean contains(T value) {
         Iterator<T> it = set.iterator();
         while (it.hasNext()) {
-            //if (it.next() == value) {
-            if (it.next().equals(value)) {
-                System.out.println("Element " + value.toString()
-                        + " in collection. Then return contains TRUE");
+            if (Objects.equals(it.next(), value)) {
                 return true;
             }
         }
-        System.out.println("Element " + value.toString()
-                + " NOT in collection. "
-                + "Then return contains FALSE");
         return false;
     }
 

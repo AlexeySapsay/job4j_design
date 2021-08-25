@@ -1,7 +1,6 @@
 package ru.job4j.collection.set;
 
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class SimpleSetTest {
@@ -29,21 +28,29 @@ public class SimpleSetTest {
         assertFalse(set.contains(2));
         assertTrue(set.add(2));
         assertTrue(set.contains(2));
+    }
 
+    @Test
+    public void whenContainsNullThenTrue() {
+        Set<Integer> set = new SimpleSet<>();
         assertFalse(set.contains(null));
-        assertFalse(set.contains(null));
+        set.add(null);
+        assertTrue(set.contains(null));
+        set.add(null);
+
+        assertFalse(set.add(null));
+        assertFalse(set.add(null));
     }
 
     @Test
     public void whenAddNonNullDuplicates() {
         Set<Integer> set = new SimpleSet<>();
         assertTrue(set.add(1));
-        assertTrue(set.add(1));
-        assertTrue(set.add(1));
-        assertTrue(set.add(1));
+        assertFalse(set.add(1));
+        assertFalse(set.add(1));
 
-        //assertFalse(set.add(1));
-        //assertTrue(set.add(3));
+        assertTrue(set.add(3));
+        assertFalse(set.add(3));
     }
 
     @Test
@@ -51,15 +58,17 @@ public class SimpleSetTest {
         Set<Integer> set = new SimpleSet<>();
         assertTrue(set.add(1));
         assertTrue(set.contains(1));
-        //assertFalse(set.add(1));
+        assertFalse(set.add(1));
     }
 
     @Test
     public void whenAddNull() {
         Set<Integer> set = new SimpleSet<>();
         assertTrue(set.add(null));
-        //assertTrue(set.contains(null));
-        //assertFalse(set.add(null));
-    }
+        assertTrue(set.contains(null));
+        assertFalse(set.add(null));
+        assertFalse(set.add(null));
 
+        assertTrue(set.contains(null));
+    }
 }
