@@ -1,7 +1,6 @@
 package ru.job4j.map;
 
-import java.util.Arrays;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * // https://www.geeksforgeeks.org/internal-working-of-hashmap-java/
@@ -19,35 +18,26 @@ import java.util.Iterator;
 public class SimpleMap<K, V> implements Map<K, V> {
     private static final float LOAD_FACTOR = 0.75f;
     private int capacity = 8;           //начальное количество бакетов в коллекции при инициализации
-    private int countExpand = 1;
     private int modCount = 0;           //реальное количество модификаций коллекции
     private int expectedModCount = 0;   //ожидаемое количество модификаций коллекции
     private int size = 0;               //  показывает количество занятых бакетов
 
     private MapEntry<K, V>[] table = new MapEntry[capacity]; // внутренний массив SimpleMap
-    //private MapEntry<K, V>[] tableBuffer = new MapEntry[capacity * 2]; // внутренний массив SimpleMap
-
 
     @Override
     public boolean put(K key, V value) {
-        //         вычисляем хэш элемента
-        //         вычисляем хэш в таблице
-        //         определяем индекс в таблице
-        int indexInMapEntry = indexFor(key.hashCode());
-
         // проверка, на наличие свободного места для вставки элемента
         // если места не достаточно, увеличиваем размер таблицы в 2 раза
         if (capacity * LOAD_FACTOR <= size) {
-            //countExpand *= capacity * 2;
-            //countExpand = capacity * 2;
-            //countExpand = capacity * 2;
             capacity = capacity * 2;
-            countExpand = capacity;
             expand();
-            System.out.println("table length : " + table.length);
-            //continue;
         }
-        System.out.println("table length : " + table.length);
+
+        // вычисляем хэш элемента
+        // вычисляем хэш в таблице
+        // определяем индекс в таблице
+        int indexInMapEntry = indexFor(key.hashCode());
+
 
         //  проверяем свободна ли ячейка в table по адресу indexInTable
         //  условие(если ячейка по индексу свободна){
@@ -58,66 +48,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
             return false;
         } else {
             table[indexInMapEntry] = new MapEntry(key, value);
+            modCount++;
             size++;
         }
-
-
-        //System.out.println("Place in table is : " + table[indexInMapEntry]);
-        //+ " key is: " + table[indexInMapEntry].key);
-        //+ "value is : " + table[indexInMapEntry].value);
-        //System.out.println("Index is : " + indexInMapEntry);
-
-        //System.out.println("MapEntry is:" + table);
-
-//        for (MapEntry mapEntry : table) {
-//            System.out.println(mapEntry);
-//            //mapEntry = new MapEntry("Alex", 10);
-//        }
-
-        // заполняем значениями, что бы проверить заполняемость и корректный вывод
-
-//        for (MapEntry mapEntry : table) {
-//            mapEntry = new MapEntry("Alex", 10);
-//            System.out.println("mapEntry is : "
-//                    + mapEntry.toString().substring(13, mapEntry.toString().length() - 13)
-//                    + " mapEntry.key is: " + mapEntry.key
-//                    + " mapEntry.value is: " + mapEntry.value);
-//        }
-
-
-//        System.out.println(table[indexInMapEntry].key
-//                + " " + table[indexInMapEntry].value);
-
-//        for (int i = 0; i < table.length; i++) {
-//            table[i] = new MapEntry(i, i);
-//            System.out.println(" key :" + table[i].key
-//                    + " value :" + table[i].value);
-//        }
-        // вызов метода только для теста метода, удалить этот вызов в будущем
-        //expand();
-
-//        if (table[indexInMapEntry] == null) {
-//            table[indexInMapEntry].key = key;
-//            table[indexInMapEntry].value = value;
-//
-//            System.out.println("Index in table after put is : " + table[indexInMapEntry]);
-//            //+ " key is: " + table[indexInMapEntry].key);
-//            //+ "value is : " + table[indexInMapEntry].value);
-//            System.out.println("Index after put is : " + indexInMapEntry);
-//
-//            return true;
-//        }
-
-
-        System.out.println("table.length : " + table.length);
-        //для вывода
-        for (int i = 0; i < table.length; i++) {
-            if (table[i] == null) {
-                continue;
-            }
-            System.out.println(table[i].key + " " + table[i].value);
-        }
-
         return true;
     }
 
@@ -151,89 +84,99 @@ public class SimpleMap<K, V> implements Map<K, V> {
      * рехеширование
      */
     private void expand() {
-        //int multyplyCapacityTwo = capacity * 2;
-        int multyplyCapacityTwo = countExpand;
         // создаем буферную талицу размером первая * 2
-        MapEntry<K, V>[] tableBuffer = new MapEntry[multyplyCapacityTwo]; // внутренний массив SimpleMap
+        MapEntry<K, V>[] tableBuffer = new MapEntry[capacity]; // внутренний массив SimpleMap
 
-//        for (int i = 0; i < tableBuffer.length; i++) {
-//            tableBuffer[i] = new MapEntry(i, i);
-//            System.out.println(tableBuffer[i].key + " " + tableBuffer[i].value);
-//        }
-        for (MapEntry mapEntry : table) {
-            //int indexForBufferTable = indexFor(mapEntry.key.hashCode());
-            if (mapEntry == null) {
-                continue;
-            }
-            //int i = hash()
-            int indexForBufferTable = indexFor(hash(mapEntry.key.hashCode()));
-            System.out.println("indexForBufferTable " + indexForBufferTable);
-            tableBuffer[indexForBufferTable] = mapEntry;
-        }
-        System.out.println("table length : " + table.length);
-        System.out.println("tableBuffer length : " + tableBuffer.length);
-
+        // рехешируем table и сохраняем по новым индексам в tableBuffer
         for (MapEntry mapEntry : table) {
             if (mapEntry == null) {
                 continue;
+            } else {
+                int indexForBufferTable = indexFor(hash(mapEntry.key.hashCode()));
+                tableBuffer[indexForBufferTable] = mapEntry;
             }
-            System.out.println("mapEntry.key : " + mapEntry.key
-                    + " mapEntry.value : " + mapEntry.value);
         }
-
-        for (MapEntry mapEntry : tableBuffer) {
-            if (mapEntry == null) {
-                continue;
-            }
-            System.out.println(" tableBuffer mapEntry.key : " + mapEntry.key
-                    + " tableBuffer mapEntry.value : " + mapEntry.value);
-        }
-        //MapEntry<K, V>[] table = new MapEntry[capacity * 2];
-        //table = tableBuffer;
-        table = Arrays.copyOf(tableBuffer, multyplyCapacityTwo);
-
-        System.out.println("table.length before : " + table.length);
-
-        for (MapEntry mapEntry : table) {
-            if (mapEntry == null) {
-                continue;
-            }
-            System.out.println("mapEntry.key : " + mapEntry.key
-                    + " mapEntry.value : " + mapEntry.value);
-        }
-
-        System.out.println("table.length after : " + table.length);
-
-        // производим рехеширование значений из первой в буфер
-
-        //tableBuffer;
-        // увеличиваем размер первой таблицы в 2 раза
-        // закидываем в нее значения из буферной
-
-        /**
-         * Как то организовать рехеширование таблицы
-         * при расширении
-         */
+        table = Arrays.copyOf(tableBuffer, capacity);
     }
 
+    /**
+     * Извлекает значение находящееся по ключу key
+     *
+     * @param key ключ для поиска пары
+     * @return Метод get() в случае отсутствия значения должен
+     * возвращать null, в противном случае само значение.
+     */
     @Override
     public V get(K key) {
+        for (MapEntry mapEntry : table) {
+            if (mapEntry == (null)) {
+                continue;
+            }
+            if (mapEntry.key.equals(key)) {
+                return (V) mapEntry.value;
+            }
+        }
         return null;
     }
 
+    /**
+     * Метод удаляет пару ключ key и значение value по ключу key
+     *
+     * @param key ключ
+     * @return Метод remove() в случае успешного удаления должен возвращать true,
+     * в противном случае false.
+     */
     @Override
     public boolean remove(K key) {
+        for (MapEntry mapEntry : table) {
+            if (mapEntry == (null)) {
+                continue;
+            }
+            if (mapEntry.key.equals(key)) {
+                mapEntry.key = null;
+                mapEntry.value = null;
+                modCount++;
+                size--;
+                return true;
+            }
+        }
         return false;
     }
 
     /**
+     * Также, реализуйте интерфейс Iterable - метод iterator()
+     * возвращает итератор, предназначенный для обхода данной структуры.
+     * <p>
+     * Объект должен принимать количество ячеек. Структура должна быть
+     * динамической.
      * Итератор должен обладать fail-fast поведением
      *
-     * @return Iterator
+     * @return SimpleHashIterator
      */
     @Override
     public Iterator<K> iterator() {
-        return null;
+        expectedModCount = modCount;
+
+        class SimpleHashIterator implements Iterator<K> {
+            int valueIterator = 0;
+
+            @Override
+            public boolean hasNext() {
+                return valueIterator < size;
+            }
+
+            @Override
+            public K next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                return (K) table[size++];
+            }
+        }
+        return new SimpleHashIterator();
     }
 
     /**
@@ -264,6 +207,40 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 + '}';
     }
 
-    // обязательно переопределить иквал и хэшкод
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
+        SimpleMap<?, ?> simpleMap = (SimpleMap<?, ?>) o;
+
+        if (capacity != simpleMap.capacity) {
+            return false;
+        }
+        if (modCount != simpleMap.modCount) {
+            return false;
+        }
+        if (expectedModCount != simpleMap.expectedModCount) {
+            return false;
+        }
+        if (size != simpleMap.size) {
+            return false;
+        }
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(table, simpleMap.table);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = capacity;
+        result = 31 * result + modCount;
+        result = 31 * result + expectedModCount;
+        result = 31 * result + size;
+        result = 31 * result + Arrays.hashCode(table);
+        return result;
+    }
 }
