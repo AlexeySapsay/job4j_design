@@ -36,7 +36,7 @@ public interface Tree<E> {
      * Когда value отсутствует во всем дереве, то возвращается return = Optional.empty();
      *
      * @param value значение для поиска
-     * @return Optional <Node <E>>
+     * @return Optional Node E
      */
     Optional<Node<E>> findBy(E value);
 
