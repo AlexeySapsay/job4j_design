@@ -19,7 +19,7 @@ public class SimpleArray<T> implements Iterable<T> {
     /**
      * adds element @model to an first empty baket array
      *
-     * @param model
+     * @param model элемент для добавления в коллекцию
      */
     public void add(T model) {
         objArray[counter++] = model;
@@ -30,7 +30,8 @@ public class SimpleArray<T> implements Iterable<T> {
      *
      * @param index index of position
      * @param model element to set
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException исключение, сигнализирующее о выходе
+     * за границу допустимых значений
      */
     public void set(int index, T model) throws IndexOutOfBoundsException {
         Objects.checkIndex(index, counter);
@@ -42,8 +43,9 @@ public class SimpleArray<T> implements Iterable<T> {
      * все находящиеся справа элементы при этом необходимо сдвинуть
      * на единицу влево (в середине массива не должно быть пустых ячеек);
      *
-     * @param index
-     * @throws IndexOutOfBoundsException
+     * @param index индекс элемента для удаления
+     * @throws IndexOutOfBoundsException исключение, сигнализирующее о выходе
+     *      за границу допустимых значений
      */
     public void remove(int index) throws IndexOutOfBoundsException {
         Objects.checkIndex(index, counter);
@@ -65,7 +67,8 @@ public class SimpleArray<T> implements Iterable<T> {
      *
      * @param index - take element by that index
      * @return - element by Index from (T) objArray[index]
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException сключение, сигнализирующее о выходе
+     *           за границу допустимых значений
      */
     public T get(int index) throws IndexOutOfBoundsException {
         Objects.checkIndex(index, counter);
@@ -73,7 +76,7 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     /**
-     * Также, реализуйте интерфейс Iterable<T> - метод iterator()
+     * Также, реализуйте интерфейс Iterable - метод iterator()
      * возвращает итератор, предназначенный для обхода данной структуры.
      * <p>
      * Объект должен принимать количество ячеек. Структура не должна быть

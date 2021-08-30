@@ -31,7 +31,7 @@ public class SimpleStack<T> {
 
     /**
      * Метод size() возвращает количество элементов в SimpleStack
-     * @return
+     * @return linked.size()- количесто заполенных ячеек
      */
     public int size() {
         return linked.size();

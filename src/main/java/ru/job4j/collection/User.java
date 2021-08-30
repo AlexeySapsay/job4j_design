@@ -1,6 +1,6 @@
 package ru.job4j.collection;
 
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Модель User
@@ -14,11 +14,48 @@ import java.util.Date;
 public class User {
     private String name;
     private int children;
-    private Date calendarBirthday;
+    private Calendar birthday;
+    private int hash;
 
-    public User(String name, int children, Date calendarBirthday) {
+    public User(String name, int children, Calendar birthday) {
         this.name = name;
         this.children = children;
-        this.calendarBirthday = calendarBirthday;
+        this.birthday = birthday;
+    }
+
+    @Override
+    public String toString() {
+        return "User{"
+                + "name='" + name + '\''
+                + ", children=" + children
+                + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        User user = (User) o;
+
+        if (children != user.children) {
+            return false;
+        }
+        if (name != null ? !name.equals(user.name) : user.name != null) {
+            return false;
+        }
+        return birthday != null ? birthday.equals(user.birthday) : user.birthday == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + children;
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        return result;
     }
 }

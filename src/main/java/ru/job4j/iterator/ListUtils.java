@@ -22,7 +22,7 @@ public class ListUtils {
      * @param list  Лист, который будем индексировать, от 0 до size-1
      * @param index позиция для вставки
      * @param value значение для вставки
-     * @param <T>   тип данных, с которым работает коллекция и класс
+     * @param <T> data type
      */
     public static <T> void addBefore(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
@@ -61,7 +61,7 @@ public class ListUtils {
      * Метод удаляет все элементы, которые удовлетворяют предикату
      *
      * @param list Лист, который будем индексировать, от 0 до size - 1
-     *             //* @param filter условие по которому происходит фильтрация
+     * @param filter условие по которому происходит фильтрация
      * @param <T>  тип данных, с которым работает коллекция и класс
      */
     public static <T> void removeIf(List<T> list, Predicate<T> filter) {
@@ -91,7 +91,7 @@ public class ListUtils {
     }
 
     /**
-     * Метод удаляет все элементы, которые находятся в List<T> elements
+     * Метод удаляет все элементы, которые находятся в List elements
      *
      * @param list     входной лист значений
      * @param elements элементы которые будут удаленны во входном list
