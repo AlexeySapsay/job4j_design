@@ -3,6 +3,7 @@ package ru.job4j.io;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -63,6 +64,6 @@ public class LogFilter {
     }
 
     public static void main(String[] args) {
-        save(filter("log.txt"), "404.txt");
+        save(Collections.singletonList("log.txt"), "404.txt");
     }
 }
