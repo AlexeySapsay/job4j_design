@@ -7,7 +7,6 @@ import static ru.job4j.io.Matrix.multiple;
 
 /**
  * Изучение работы с потоками ввода- вывода
- *
  * @author AlexSapsay (sapsayalexey@gmail.com)
  * @version 1.0
  * @since 29.08.2021
