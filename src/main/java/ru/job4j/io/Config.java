@@ -1,11 +1,9 @@
 package ru.job4j.io;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.StringJoiner;
 
 /**
  * Изучение работы с потоками ввода- вывода
@@ -31,11 +29,22 @@ public class Config {
      * Важно в файле могут быть пустые строки и комментарии их нужно пропускать.
      */
     public void load() {
-
+        try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
+            read.lines().filter(s -> !s.contains("#") && s.length() > 0)
+                    .forEach(string -> {
+                        String[] buffer = string.split("=");
+                        if (buffer.length != 2) {
+                            throw new IllegalArgumentException();
+                        }
+                        values.put(buffer[0], buffer[1]);
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String value(String key) {
-        throw new UnsupportedOperationException("Don't impl this method yet!");
+        return values.get(key);
     }
 
     @Override
@@ -50,6 +59,6 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Config("app.properties"));
+        new Config("./data/pair_without_comment.properties").load();
     }
 }
