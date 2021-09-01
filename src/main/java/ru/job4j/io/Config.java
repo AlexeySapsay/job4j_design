@@ -18,7 +18,7 @@ import java.io.FileReader;
 
 public class Config {
     private final String path;
-    private final Map<String, String> values = new HashMap<String, String>();
+    private final Map<String, String> values = new HashMap<>();
 
     public Config(final String path) {
         this.path = path;
@@ -29,14 +29,17 @@ public class Config {
      * Важно в файле могут быть пустые строки и комментарии их нужно пропускать.
      */
     public void load() {
-        try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            read.lines().filter(s -> !s.contains("#") && s.length() > 0)
+        //try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
+        try (BufferedReader read = new BufferedReader(new FileReader(path), 1000000)) {
+            read.lines().
+                    filter(s -> !s.contains("#") && s.length() > 0)
                     .forEach(string -> {
                         String[] buffer = string.split("=");
                         if (buffer.length != 2) {
                             throw new IllegalArgumentException();
+                        } else {
+                            values.put(buffer[0], buffer[1]);
                         }
-                        values.put(buffer[0], buffer[1]);
                     });
         } catch (Exception e) {
             e.printStackTrace();
