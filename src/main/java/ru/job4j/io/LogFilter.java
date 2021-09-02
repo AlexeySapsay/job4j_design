@@ -25,8 +25,7 @@ public class LogFilter {
     public static List<String> filter(String file) {
         List<String> buffer = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            //  читаем и выводим на консоль. Аналогичная запись без применения
-            // stream API
+        // читаем и выводим на консоль. Аналогичная запись без применения stream API
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 List<String> lineSplitedToWords = Arrays.asList(line.split(" "));
                 if (lineSplitedToWords.get(lineSplitedToWords.size() - 2).contains("404")
