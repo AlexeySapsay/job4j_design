@@ -63,5 +63,7 @@ public class Config {
 
     public static void main(String[] args) {
         new Config("./data/pair_without_comment.properties").load();
+        System.out.println(new Config("./data/pair_without_comment.properties"));
     }
 }
+
