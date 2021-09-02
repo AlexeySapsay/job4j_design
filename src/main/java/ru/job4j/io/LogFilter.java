@@ -29,7 +29,8 @@ public class LogFilter {
             // stream API
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 List<String> lineSplitedToWords = Arrays.asList(line.split(" "));
-                if (lineSplitedToWords.get(lineSplitedToWords.size() - 2).contains("404")) {
+                if (lineSplitedToWords.get(lineSplitedToWords.size() - 2).contains("404")
+                        && lineSplitedToWords.get(lineSplitedToWords.size() - 2).length() == 3) {
                     buffer.add(line);
                 }
             }
@@ -65,5 +66,6 @@ public class LogFilter {
 
     public static void main(String[] args) {
         save(Collections.singletonList("log.txt"), "404.txt");
+        System.out.println("Done");
     }
 }
