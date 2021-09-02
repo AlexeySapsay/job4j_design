@@ -1,5 +1,7 @@
 package ru.job4j.io;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 import java.io.BufferedReader;
@@ -29,19 +31,21 @@ public class Config {
      * Важно в файле могут быть пустые строки и комментарии их нужно пропускать.
      */
     public void load() {
-        //try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-        try (BufferedReader read = new BufferedReader(new FileReader(path), 1000000)) {
+        try (BufferedReader read = new BufferedReader(new FileReader(path))) {
             read.lines().
                     filter(s -> !s.contains("#") && s.length() > 0)
                     .forEach(string -> {
                         String[] buffer = string.split("=");
+                        //if (buffer.length != 2 && (buffer[0].length() == 0 || buffer[1].length() == 0)) {
+
                         if (buffer.length != 2) {
                             throw new IllegalArgumentException();
-                        } else {
-                            values.put(buffer[0], buffer[1]);
                         }
+                        values.put(buffer[0], buffer[1]);
+                        System.out.println(values.entrySet());
                     });
-        } catch (Exception e) {
+            } catch (IllegalArgumentException | IOException e) {
+        //} catch (IOException e) {
             e.printStackTrace();
         }
     }

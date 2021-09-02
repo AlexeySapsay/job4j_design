@@ -1,6 +1,5 @@
 package ru.job4j.io;
 
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -38,19 +37,18 @@ public class ConfigTest {
         String path = "./data/pair_with_comment_and_null_value2.properties";
         Config config = new Config(path);
         config.load();
+
         assertThat(config.value("hibernate.connection.surname"), is("Sapsay"));
-        assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
     }
 
     @Test
     public void whenPairWithCommentAndNullValue3() {
-        String path = "./data/pair_with_comment_and_null_value2.properties";
+        String path = "./data/pair_with_comment_and_null_value3.properties";
         Config config = new Config(path);
         config.load();
-        //assertFalse(config.value("hibernate.connection.name"), is("Alexey"));
-        //assertThat(config.value("hibernate.connection.surname"), is("Sapsay"));
-        //assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
-        //assertThat(config.value("hibernate.connection.driver_class"), is("org.postgresql.Driver"));
-        //assertThat(config.value("hibernate.connection.password"), is("password"));
+        assertThat(config.value("hibernate.connection.database"), is("postgresql"));
+        assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
+        assertThat(config.value("hibernate.connection.driver_class"), is("org.postgresql.Driver"));
+        assertThat(config.value("hibernate.connection.username"), is("postgresql1"));
     }
 }
