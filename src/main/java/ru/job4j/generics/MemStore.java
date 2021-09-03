@@ -34,9 +34,9 @@ public class MemStore<T extends Base> implements Store<T> {
     @Override
     public boolean replace(String id, T model) {
         boolean result = false;
-        int index = takeIndexById(id);
-        if (index != -1) {
-            mem.put(String.valueOf(index), model);
+        if (mem.containsKey(id)) {
+            mem.remove(id);
+            mem.put(id, model);
             result = true;
         }
         return result;
@@ -51,9 +51,8 @@ public class MemStore<T extends Base> implements Store<T> {
     @Override
     public boolean delete(String id) {
         boolean result = false;
-        int index = takeIndexById(id);
-        if (index != -1) {
-            mem.remove(index);
+        if (mem.containsKey(id)) {
+            mem.remove(id);
             result = true;
         }
         return result;
@@ -67,28 +66,6 @@ public class MemStore<T extends Base> implements Store<T> {
      */
     @Override
     public T findById(String id) {
-        int index = takeIndexById(id);
-        if (index != -1) {
-            return mem.get(index);
-        }
-        return null;
-    }
-
-    /**
-     * Находим индекс index по id элемента
-     *
-     * @param id элемента для поиска
-     * @return возврат значения, если оно присутствет, либо(-1)
-     * если значение отсутствует
-     */
-    private int takeIndexById(String id) {
-        int result = -1;
-        for (int index = 0; index < mem.size(); index++) {
-            if (mem.get(index).getId().equals(id)) {
-                result = index;
-                break;
-            }
-        }
-        return result;
+        return mem.get(id);
     }
 }
