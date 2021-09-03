@@ -30,8 +30,10 @@ public class Dir {
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
-        //System.out.println(String.format("size : %s", file.getTotalSpace()));
-
-        System.out.println("file.length() : " + file.length());
+        System.out.println(String.format("size : %s", file.getTotalSpace()));
+        //Получаем список файлов в этой директории.
+        for (File subfile : file.listFiles()) {
+            System.out.println(subfile.getAbsoluteFile() + " " + subfile.length());
+        }
     }
 }
