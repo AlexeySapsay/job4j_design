@@ -33,7 +33,7 @@ public class Dir {
         System.out.println(String.format("size : %s", file.getTotalSpace()));
         //Получаем список файлов в этой директории.
         for (File subfile : file.listFiles()) {
-            System.out.println(subfile.getAbsoluteFile() + " " + subfile.length());
+            System.out.println(subfile.getName() + " " + subfile.length() + " Bytes");
         }
     }
 }
