@@ -36,16 +36,12 @@ public class Config {
                     filter(s -> !s.contains("#") && s.length() > 0)
                     .forEach(string -> {
                         String[] buffer = string.split("=");
-                        //if (buffer.length != 2 && (buffer[0].length() == 0 || buffer[1].length() == 0)) {
-
                         if (buffer.length != 2) {
                             throw new IllegalArgumentException();
                         }
                         values.put(buffer[0], buffer[1]);
-                        System.out.println(values.entrySet());
                     });
-            } catch (IllegalArgumentException | IOException e) {
-        //} catch (IOException e) {
+        } catch (IllegalArgumentException | IOException e) {
             e.printStackTrace();
         }
     }
