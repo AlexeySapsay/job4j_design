@@ -4,13 +4,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-
 
 import java.io.*;
 
-import static org.junit.Assert.*;
-
+/**
+ * Тестирование проекта, с использованием временной папки
+ * https://job4j.ru/profile/exercise/45/task-view/312/solutionId/198299
+ */
 public class AnalizyTest {
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
@@ -33,10 +35,7 @@ public class AnalizyTest {
         try (BufferedReader in = new BufferedReader(new FileReader(target))) {
             in.lines().forEach(rsl::append);
         }
-        // формально вывод правильный, только как разделить даты
-        // с помощью System.lineSeparator() в данном случае не представляю????
-        //"10:57:01;10:59:01System.lineSeparator()11:01:02;11:02:02"
-        assertThat(rsl.toString(), is("10:57:01;10:59:0111:01:02;11:02:02"));
+        assertThat(rsl.toString(), is("10:57:01;10:59:01;11:01:02;11:02:02;"));
     }
 
     @Test
@@ -57,8 +56,7 @@ public class AnalizyTest {
         try (BufferedReader in = new BufferedReader(new FileReader(target))) {
             in.lines().forEach(rsl::append);
         }
-
-        assertThat(rsl.toString(), is("10:57:01;11:02:02"));
+        assertThat(rsl.toString(), is("10:57:01;11:02:02;"));
     }
 
     @Test
@@ -85,9 +83,6 @@ public class AnalizyTest {
         try (BufferedReader in = new BufferedReader(new FileReader(target))) {
             in.lines().forEach(rsl::append);
         }
-        // формально вывод правильный, только как разделить даты
-        // с помощью System.lineSeparator() в данном случае не представляю
-        //"10:57:01;11:02:02System.lineSeparator()11:05:02;11:09:20"?????????
-        assertThat(rsl.toString(), is("10:57:01;11:02:0211:05:02;11:09:20"));
+        assertThat(rsl.toString(), is("10:57:01;11:02:02;11:05:02;11:09:20;"));
     }
 }

@@ -58,7 +58,7 @@ public class Analizy {
                 List<String> lineSplited = Arrays.asList(line.split(" "));
                 buffer.add(lineSplited.get(0));
                 buffer.add(lineSplited.get(1));
-                System.out.println(lineSplited.get(0) + " " + lineSplited.get(1));
+                //System.out.println(lineSplited.get(0) + " " + lineSplited.get(1));
             }
 
             // Фильтр, извлекает значения из buffer и добавляем в unavailableLogList
@@ -100,8 +100,11 @@ public class Analizy {
                 new BufferedOutputStream(new FileOutputStream(target)))) {
             for (int i = 0; i < unavailableLogListTimeStamp.size(); i += 2) {
                 out.append(unavailableLogListTimeStamp.get(i)).append(";");
-                out.append(unavailableLogListTimeStamp.get(i + 1));
-                out.append(System.lineSeparator());
+                out.append(unavailableLogListTimeStamp.get(i + 1)).append(";")
+                        .append(System.lineSeparator());
+                //out.append(System.lineSeparator());
+                //out.append(System.lineSeparator());
+                //System.out.println();
             }
         } catch (
                 Exception e) {
