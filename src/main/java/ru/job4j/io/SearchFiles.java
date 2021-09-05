@@ -35,29 +35,21 @@ public class SearchFiles implements FileVisitor<Path> {
         return CONTINUE;
     }
 
+    /**
+     * Ищет файл или дерикторию
+     * @param file возвращает путь к файлу или деректории
+     * @param attrs атрибуты создания файла или дериктории, дата создания,
+     *              размер и т.д
+     * @return возвращает путь к файлу
+     * @throws IOException исключение ввода- вывода
+     */
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
             throws IOException {
-//        if (file.getFileName().toString().endsWith("js")) {
-//            System.out.println(file.getFileName());
-//            return CONTINUE;
-//        }
-        //if (file.getFileName().toString() == condition) {
-
-//        if (condition.test(Paths.get(file.getFileName().toString()))) {
-//            System.out.println(file.getFileName());
-//            return CONTINUE;
-//        }
         if (predicate.test(Paths.get((file.getFileName().toString())))) {
-            //System.out.println(file.getFileName());
-
-            //getPaths();
-            //file.getPaths();
             pathList.add(Paths.get((file.getFileName().toString())));
             return CONTINUE;
         }
-
-        //System.out.println(file.toAbsolutePath());
         return CONTINUE;
     }
 
@@ -78,10 +70,6 @@ public class SearchFiles implements FileVisitor<Path> {
      * предикату файла.
      */
     public List<Path> getPaths() {
-        //return new SearchFiles(condition).getPaths();
-        System.out.println("здесь должен быть путь к файлу, "
-                + "подходящего под предикат");
-
         return pathList;
     }
 }
