@@ -41,7 +41,7 @@ public class Config {
                         }
                         values.put(buffer[0], buffer[1]);
                     });
-        } catch (IllegalArgumentException | IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
