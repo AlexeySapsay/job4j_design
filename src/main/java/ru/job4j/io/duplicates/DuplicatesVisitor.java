@@ -22,54 +22,75 @@ import java.util.*;
  * @since 06.09.2021
  */
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    int counter = 0;
-    int counterDuplicate = 0;
+    boolean isDuplicate = false;
     List<FileProperty> filePropertyList = new ArrayList<>();
     Map<Path, FileProperty> hashMap = new HashMap<>();
-    boolean isDuplicate = false;
-    Map<Path, FileProperty> hashMapOnlyDuplicates = new HashMap<>();
-
-    //Map<Path, FileProperty> hashMapBuffer = new HashMap<>();
-    //Map.Entry<Path, FileProperty> hashMapBufferEntry = (Map.Entry<Path, FileProperty>) new HashMap<Path, FileProperty>();
-    //ArrayList<Map.Entry<Path, FileProperty>> bufferArrayList = new ArrayList<>();
-
+    Map<FileProperty, Integer> hashMapWithCounter = new HashMap<>();
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes atts)
             throws IOException {
 
-        // сохраняем все файлы и пути в arrayList
-        filePropertyList.add(new FileProperty(Files.size(file), file.getFileName().toString()));
+        FileProperty fileProperty = new FileProperty(Files.size(file),
+                file.getFileName().toString());
+
+        // сохраняем file в FileProperty в arrayList
+        filePropertyList.add(fileProperty);
+
+        // сохраняем file в FileProperty в hashMap
+        hashMap.put(file, fileProperty);
+
+        // сохраняем FileProperty в hashMapWithCounter
+        // если значение присутствует, то увеличиваем counter на +1
+        hashMapWithCounter.computeIfPresent(fileProperty, (key, counter) -> counter + 1);
+
+        // сохраняем FileProperty в hashMapWithCounter
+        // если значение значение отсутствовало, то помещаем его в мапу
+        // и увеличиваем counter +1
+        hashMapWithCounter.putIfAbsent(fileProperty, 1);
+
+        hashMapWithCounter.entrySet()
+                .stream()
+                .filter(e -> e.getValue() > 1)
+                .forEach(System.out::println);
+
+
         // проверяем находится ли файл в hashMap
-        if (hashMap.containsValue(new FileProperty(Files.size(file), file.getFileName().toString()))) {
-            isDuplicate = true;
-            counterDuplicate++;
-            // добавляем дубликат в hashMapOnlyDuplicates
-            hashMapOnlyDuplicates.put(file,
-                    (new FileProperty(Files.size(file),
-                            file.getFileName().toString())));
-            //System.out.println();
-            System.out.println("path1 is: " + file);
-            // добавляем дубликат в hashMapOnlyDuplicates, хранимый в hashMap
-            hashMapOnlyDuplicates.put(
-                    (Path) hashMap.get(file.getFileName().toAbsolutePath()),
-                    hashMap.get(file.getFileName()));
+        // если находится, то перед нами дубликат, добавляем его в
+        // hashMapOnlyDuplicates
+//        if (hashMap.containsValue(new FileProperty(Files.size(file),
+//                file.getFileName().toString()))) {
+//            isDuplicate = true;
+//            counterDuplicate++;
+//            // добавляем дубликат в hashMapOnlyDuplicates
+//            hashMapOnlyDuplicates.put(file,
+//                    (new FileProperty(Files.size(file),
+//                            file.getFileName().toString())));
 
-            System.out.println("path2 is: "
-                    //+ ((Path) hashMap.get(file.getFileName().toAbsolutePath()))
 
-                    + System.lineSeparator()
-                    + hashMapOnlyDuplicates.get(file).toString()
-                    + System.lineSeparator()
-                    + "is duplicate? " + isDuplicate
-                    + System.lineSeparator()
-                    + "Total duplicate counter: " + counterDuplicate
-                    + System.lineSeparator());
-        }
-
+        // формируем вывод на консоль
+        //System.out.println();
+//            System.out.println("path1 is: " + file);
+//            // добавляем дубликат в hashMapOnlyDuplicates, хранимый в hashMap
+//            hashMapOnlyDuplicates.put(
+//                    (Path) hashMap.get(file.getFileName().toAbsolutePath()),
+//                    hashMap.get(file.getFileName()));
+//
+//            System.out.println("path2 is: "
+//                    //+ ((Path) hashMap.get(file.getFileName().toAbsolutePath()))
+//
+//                    + System.lineSeparator()
+//                    + hashMapOnlyDuplicates.get(file).toString()
+//                    + System.lineSeparator()
+//                    + "is duplicate? " + isDuplicate
+//                    + System.lineSeparator()
+//                    + "Total duplicate counter: " + counterDuplicate
+//                    + System.lineSeparator());
+//        }
 
         // сохраняем все файлы и пути в hashMap
-        hashMap.put(file, new FileProperty(Files.size(file), file.getFileName().toString()));
+//        hashMap.put(file, new FileProperty(Files.size(file),
+//                file.getFileName().toString()));
 
 
         // тупо выводим один файл, который сейчас взять в обработку на печать
