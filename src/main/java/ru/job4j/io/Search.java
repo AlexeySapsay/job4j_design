@@ -22,15 +22,10 @@ import java.util.function.Predicate;
 public class Search {
     public static void main(String[] args) throws IOException {
         // валидация входных параметров
-        if (args.length == 0 || args.length == 1) {
-            throw new IllegalArgumentException(
-                    "Root folder is null. Usage java -jar dir.jar ROOT_FOLDER."
-                            + System.lineSeparator()
-                            + "Enter path to dir search and extension of file like:"
-                            + System.lineSeparator()
-                            + "/some/path extension");
-        }
-        // чтобы начальная папка передавалась через аргументы запуска.
+        validation((args[0]), args[1]);
+
+        // чтобы начальная папка передавалась через аргументы запуска
+        // указываемый параметры в  терминале или командной строке.
         Path start = Paths.get(args[0]);
         String word = args[1];
 
@@ -44,5 +39,22 @@ public class Search {
         SearchFiles searcher = new SearchFiles(condition);
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
+    }
+
+    /**
+     * Метод валидации входных параметров, заданных через терминал
+     * или командную строку
+     * @param first имя папки с которой начать поиск
+     * @param second расширение файлов, которые будем искать
+     */
+    public static void validation(String first, String second) {
+        if (first.length() == 0 || second.length() == 0) {
+            throw new IllegalArgumentException(
+                    "Root folder is null. Usage java -jar dir.jar ROOT_FOLDER."
+                            + System.lineSeparator()
+                            + "Enter path to dir search and extension of file like:"
+                            + System.lineSeparator()
+                            + "/some/path extension");
+        }
     }
 }
