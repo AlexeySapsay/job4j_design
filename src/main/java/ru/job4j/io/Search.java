@@ -22,10 +22,10 @@ import java.util.function.Predicate;
 public class Search {
     public static void main(String[] args) throws IOException {
         // валидация входных параметров
-        validation((args[0]), args[1]);
+        validation(args);
 
-        // чтобы начальная папка передавалась через аргументы запуска
-        // указываемый параметры в  терминале или командной строке.
+        // Начальная папка передавалась через аргументы запуска,
+        // указываемыми параметроами в  терминале или командной строке.
         Path start = Paths.get(args[0]);
         String word = args[1];
 
@@ -44,11 +44,14 @@ public class Search {
     /**
      * Метод валидации входных параметров, заданных через терминал
      * или командную строку
-     * @param first имя папки с которой начать поиск
-     * @param second расширение файлов, которые будем искать
+     *
+     * @param argsArr параметры для валидации.
+     *                argsArr[0] имя папки с которой начать поиск
+     *                argsArr[1] расширение файлов, которые будем искать
      */
-    public static void validation(String first, String second) {
-        if (first.length() == 0 || second.length() == 0) {
+
+    public static void validation(String[] argsArr) {
+        if (argsArr[0].length() == 0 || argsArr[1].length() == 0) {
             throw new IllegalArgumentException(
                     "Root folder is null. Usage java -jar dir.jar ROOT_FOLDER."
                             + System.lineSeparator()
