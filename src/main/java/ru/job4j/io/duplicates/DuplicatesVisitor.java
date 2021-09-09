@@ -26,6 +26,8 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     Map<Path, FileProperty> hashMap = new HashMap<>();
     Map<FileProperty, Integer> hashMapWithCounter = new HashMap<>();
 
+    Set<FileProperty> filePropertySet = new HashSet<>();
+
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes atts)
             throws IOException {
@@ -33,31 +35,39 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         FileProperty fileProperty = new FileProperty(Files.size(file),
                 file.getFileName().toString());
 
+        if (!filePropertySet.add(fileProperty)) {
+            System.out.println(fileProperty.getName() + " is a duplicate");
+        }
+
+
         // сохраняем file и FileProperty в arrayList
-        filePropertyList.add(fileProperty);
+        //filePropertyList.add(fileProperty);
 
         // сохраняем file и FileProperty в hashMap
-        hashMap.put(file, fileProperty);
+        //hashMap.put(file, fileProperty);
 
         // сохраняем FileProperty в hashMapWithCounter
         // если значение присутствует, то увеличиваем counter на +1
-        hashMapWithCounter.computeIfPresent(fileProperty, (key, count) -> count + 1);
+        //hashMapWithCounter.computeIfPresent(fileProperty, (key, count) -> count + 1);
 
         // сохраняем FileProperty в hashMapWithCounter
         // если значение значение отсутствовало, то помещаем его в мапу
         // и увеличиваем counter +1
-        hashMapWithCounter.putIfAbsent(fileProperty, 1);
+        //hashMapWithCounter.putIfAbsent(fileProperty, 1);
 
         // получаем мапу содержащую дубликаты
         // выводим на печать дубликаты
-        if (counter == 1710) {
-            hashMapWithCounter.entrySet()
-                    .stream()
-                    .filter(e -> e.getValue() > 1)
-                    .forEach(System.out::println);
-        }
-        System.out.println("counter: " + counter);
-        counter++;
+//        if (counter == 1710) {
+//            hashMapWithCounter.entrySet()
+//                    .stream()
+//                    .filter(e -> e.getValue() > 1)
+//                    .forEach(System.out::println);
+//        }
+//        System.out.println("counter: " + counter);
+//        counter++;
+
+
         return super.visitFile(file, atts);
+
     }
 }
