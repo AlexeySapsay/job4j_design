@@ -21,14 +21,15 @@ public class ArgsName {
      * Геттер для получения значения value по ключу key
      *
      * @param key ключь для извлечения значения value из hashMap
-     * @return value, возвращаемоое значение из базы
+     * @return value, возвращаемоое значение из хэшмапы
+     *
      */
     public String get(String key) {
         return values.get(key);
     }
 
     private void parse(String[] args) {
-        // проводим валидацию
+        // проводим валидацию именнованных входных аргументов
         validation(args);
 
         // парсим пару, сплитя по знаку равно получаем ключ значение
@@ -39,12 +40,11 @@ public class ArgsName {
             String[] keyAndValue = str.split("=");
             key = keyAndValue[0];
             value = keyAndValue[1];
-            System.out.println("key: " + key + System.lineSeparator()
-                    + "value :" + value);
+//            System.out.println("key: " + key + System.lineSeparator()
+//                    + "value :" + value);
             // чистим ключ от первого тире -
             // и заносим пару ключь = значение в мапу
             key = key.substring(1, key.length());
-            System.out.println("key after cleaning : " + key);
             values.put(key, value);
         }
     }
@@ -69,12 +69,12 @@ public class ArgsName {
                     + "Use argument like this: -Xmx=514");
         }
         for (String str : args) {
-        if (str.length() == 0 || !str.contains("=")) {
+            if (str.length() == 0 || !str.contains("=")) {
                 throw new IllegalArgumentException(" Arguments is not correct:"
                         + "Use argument like this: -Xmx=514");
             }
             // парсинг стринга
-            // разбивать на ключь и значение и проверять
+            // стрингу разбиваю на ключь и значение и проверяю
             // отличие от нуля длины ключа и значения
             // и наличие =
             String[] strings;
