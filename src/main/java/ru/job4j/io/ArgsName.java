@@ -28,11 +28,6 @@ public class ArgsName {
     }
 
     private void parse(String[] args) {
-        /* TODO parse args to values. */
-
-
-        // и пару закидываем в хэшмапу
-
         // проводим валидацию
         validation(args);
 
@@ -52,9 +47,6 @@ public class ArgsName {
             System.out.println("key after cleaning : " + key);
             values.put(key, value);
         }
-
-
-        //System.out.println(args);
     }
 
     public static ArgsName of(String[] args) {
