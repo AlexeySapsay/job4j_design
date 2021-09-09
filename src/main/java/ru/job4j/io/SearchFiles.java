@@ -37,7 +37,8 @@ public class SearchFiles implements FileVisitor<Path> {
 
     /**
      * Ищет файл или дерикторию
-     * @param file возвращает путь к файлу или деректории
+     *
+     * @param file  возвращает путь к файлу или деректории
      * @param attrs атрибуты создания файла или дериктории, дата создания,
      *              размер и т.д
      * @return возвращает путь к файлу
@@ -46,8 +47,13 @@ public class SearchFiles implements FileVisitor<Path> {
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
             throws IOException {
-        if (predicate.test(Paths.get((file.getFileName().toString())))) {
-            pathList.add(Paths.get((file.getFileName().toString())));
+        Path pathToFile = Paths.get((file.getFileName().toString()));
+//        if (predicate.test(Paths.get((file.getFileName().toString())))) {
+//            pathList.add(Paths.get((file.getFileName().toString())));
+//            return CONTINUE;
+//        }
+        if (predicate.test(pathToFile)) {
+            pathList.add(pathToFile);
             return CONTINUE;
         }
         return CONTINUE;

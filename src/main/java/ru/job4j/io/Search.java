@@ -51,7 +51,7 @@ public class Search {
      */
 
     public static void validation(String[] argsArr) {
-        if (argsArr[0].length() == 0 || argsArr[1].length() == 0) {
+        if (argsArr[0] == null || argsArr[1] == null || argsArr.length != 2) {
             throw new IllegalArgumentException(
                     "Root folder is null. Usage java -jar dir.jar ROOT_FOLDER."
                             + System.lineSeparator()
