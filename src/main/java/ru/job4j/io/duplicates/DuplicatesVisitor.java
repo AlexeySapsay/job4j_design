@@ -21,11 +21,6 @@ import java.util.*;
  * @since 06.09.2021
  */
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    int counter = 0;
-    List<FileProperty> filePropertyList = new ArrayList<>();
-    Map<Path, FileProperty> hashMap = new HashMap<>();
-    Map<FileProperty, Integer> hashMapWithCounter = new HashMap<>();
-
     Set<FileProperty> filePropertySet = new HashSet<>();
 
     @Override
@@ -35,6 +30,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         FileProperty fileProperty = new FileProperty(Files.size(file),
                 file.getFileName().toString());
 
+        // при нахождении дупликата выводим имя на консоль
         if (!filePropertySet.add(fileProperty)) {
             System.out.println(fileProperty.getName() + " is a duplicate");
         }
