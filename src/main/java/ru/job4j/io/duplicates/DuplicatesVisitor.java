@@ -24,9 +24,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     Set<FileProperty> filePropertySet = new HashSet<>();
 
     @Override
-    public FileVisitResult visitFile(Path file, BasicFileAttributes atts)
-            throws IOException {
-
+    public FileVisitResult visitFile(Path file, BasicFileAttributes atts) throws IOException {
         FileProperty fileProperty = new FileProperty(Files.size(file),
                 file.getFileName().toString());
 
