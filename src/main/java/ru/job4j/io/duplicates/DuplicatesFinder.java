@@ -19,12 +19,7 @@ import java.nio.file.Path;
 
 public class DuplicatesFinder {
     public static void main(String[] args) throws IOException {
-        // видимо понадобится добавить сканер
-        // нет добавляем запрос данных из args
-
         Path start = Path.of("./");
         Files.walkFileTree(start, new DuplicatesVisitor());
-
-
     }
 }

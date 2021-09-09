@@ -39,35 +39,6 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
             System.out.println(fileProperty.getName() + " is a duplicate");
         }
 
-
-        // сохраняем file и FileProperty в arrayList
-        //filePropertyList.add(fileProperty);
-
-        // сохраняем file и FileProperty в hashMap
-        //hashMap.put(file, fileProperty);
-
-        // сохраняем FileProperty в hashMapWithCounter
-        // если значение присутствует, то увеличиваем counter на +1
-        //hashMapWithCounter.computeIfPresent(fileProperty, (key, count) -> count + 1);
-
-        // сохраняем FileProperty в hashMapWithCounter
-        // если значение значение отсутствовало, то помещаем его в мапу
-        // и увеличиваем counter +1
-        //hashMapWithCounter.putIfAbsent(fileProperty, 1);
-
-        // получаем мапу содержащую дубликаты
-        // выводим на печать дубликаты
-//        if (counter == 1710) {
-//            hashMapWithCounter.entrySet()
-//                    .stream()
-//                    .filter(e -> e.getValue() > 1)
-//                    .forEach(System.out::println);
-//        }
-//        System.out.println("counter: " + counter);
-//        counter++;
-
-
         return super.visitFile(file, atts);
-
     }
 }
