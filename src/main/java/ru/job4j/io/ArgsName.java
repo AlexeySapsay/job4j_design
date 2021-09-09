@@ -77,20 +77,14 @@ public class ArgsName {
                     + "Use argument like this: -Xmx=514");
         }
         for (String str : args) {
-//            if (args[str].length() == 0 && !args[0].contains("=")) {
-//                throw new IllegalArgumentException(" Arguments is not correct:"
-//                        + "Use argument like : -Xmx=514");
-//            }
-
-
-            if (str.length() == 0 || !str.contains("=")) {
+        if (str.length() == 0 || !str.contains("=")) {
                 throw new IllegalArgumentException(" Arguments is not correct:"
                         + "Use argument like this: -Xmx=514");
             }
             // парсинг стринга
             // разбивать на ключь и значение и проверять
-            // наличие ключа и значения по длине
-            // наличие =
+            // отличие от нуля длины ключа и значения
+            // и наличие =
             String[] strings;
             strings = str.split("=");
             System.out.println("strings.length : " + strings.length);
@@ -101,12 +95,6 @@ public class ArgsName {
                                 + System.lineSeparator()
                                 + "Use argument like this: -Xmx=514");
             }
-
-//            if ((strings[0].length() == 0) || (strings[1].length() == 0)) {
-//                throw new IllegalArgumentException(" Arguments is not correct:"
-//                        + " THAT FORM is not correct:     -Xmx=   OR    =514"
-//                        + "Use argument like this: -Xmx=514");
-//            }
         }
     }
 
