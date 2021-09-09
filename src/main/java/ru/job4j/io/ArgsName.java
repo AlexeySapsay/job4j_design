@@ -36,8 +36,7 @@ public class ArgsName {
         // проводим валидацию
         validation(args);
 
-        // после пару разбить по знаку равно получим ключ значение
-        // чистим ключ от первого тире -
+        // парсим пару, сплитя по знаку равно получаем ключ значение
         for (String str : args) {
             String key = "";
             String value = "";
@@ -47,6 +46,11 @@ public class ArgsName {
             value = keyAndValue[1];
             System.out.println("key: " + key + System.lineSeparator()
                     + "value :" + value);
+            // чистим ключ от первого тире -
+            // и заносим пару ключь = значение в мапу
+            key = key.substring(1, key.length());
+            System.out.println("key after cleaning : " + key);
+            values.put(key, value);
         }
 
 
@@ -66,6 +70,12 @@ public class ArgsName {
      * @param args параметры, полученные из терминала или командной строки
      */
     public static void validation(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException(" Arguments is not correct:"
+                    + System.lineSeparator()
+                    + "Arguments is null"
+                    + "Use argument like this: -Xmx=514");
+        }
         for (String str : args) {
 //            if (args[str].length() == 0 && !args[0].contains("=")) {
 //                throw new IllegalArgumentException(" Arguments is not correct:"
@@ -77,8 +87,8 @@ public class ArgsName {
                 throw new IllegalArgumentException(" Arguments is not correct:"
                         + "Use argument like this: -Xmx=514");
             }
-            // возможно здесь нужно делать парсинг стринга
-            // разбирвать на ключь и значение и проверять
+            // парсинг стринга
+            // разбивать на ключь и значение и проверять
             // наличие ключа и значения по длине
             // наличие =
             String[] strings;
@@ -92,11 +102,11 @@ public class ArgsName {
                                 + "Use argument like this: -Xmx=514");
             }
 
-            if ((strings[0].length() == 0) || (strings[1].length() == 0)) {
-                throw new IllegalArgumentException(" Arguments is not correct:"
-                        + " THAT FORM is not correct:     -Xmx=   OR    =514"
-                        + "Use argument like this: -Xmx=514");
-            }
+//            if ((strings[0].length() == 0) || (strings[1].length() == 0)) {
+//                throw new IllegalArgumentException(" Arguments is not correct:"
+//                        + " THAT FORM is not correct:     -Xmx=   OR    =514"
+//                        + "Use argument like this: -Xmx=514");
+//            }
         }
     }
 
