@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.nio.Buffer;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,14 +48,22 @@ public class ConsoleChat {
     /**
      * run(), содержит логику чата;
      */
-    public void run() {
+    public void run() throws IOException {
         List<String> botAnswersList = new ArrayList<>();
         botAnswersList = readPhrases();
 
-        // генератор случайных ответов на фразы пользователя
-        int randomNum = ThreadLocalRandom.current().nextInt(1, botAnswersList.size());
-        //System.out.println(randomNum);
-        System.out.println(botAnswersList.get(randomNum));
+
+        //не плохой вариат но не работает со всеми маркерами
+//        while (true) {
+//            List<String> userAnswer = talkWithUser();
+//            System.out.println(userAnswer);
+//
+//            генератор случайных ответов на фразы пользователя
+//            int randomNum = ThreadLocalRandom.current().nextInt(1, botAnswersList.size());
+//            //System.out.println(randomNum);
+//            System.out.println(botAnswersList.get(randomNum));
+//
+//        }
 
 
         // читаем сообщение из консоли
@@ -64,14 +73,41 @@ public class ConsoleChat {
 
         // если управляющих враз не найденно
         // продолжаем работу
+        //String str;
 
-
-//        for (String fraze : botAnswersList) {
-//            System.out.println(fraze);
+//        try (BufferedReader obj = new BufferedReader(new InputStreamReader(System.in))) {
+//            str = "";
+//        } catch (Exception e) {
+//            e.printStackTrace();
 //        }
 
+        StringBuilder stringBuilder = new StringBuilder();
+
+        BufferedReader obj = new BufferedReader(new InputStreamReader(System.in));
+        String str;
+        do {
+            // читаем фразу пользователя
+            str = obj.readLine();
+            stringBuilder.append(System.lineSeparator() + str);
+            while (str.contains(STOP)) {
+                str = obj.readLine();
+                stringBuilder.append(System.lineSeparator() + str);
+                while (!str.contains(CONTINUE)) {
+                    str = obj.readLine();
+                    stringBuilder.append(System.lineSeparator() + str);
+                }
+            }
+            // генератор случайных ответов на фразы пользователя
+            int randomNum = ThreadLocalRandom.current().nextInt(1, botAnswersList.size());
+            String answerBot = botAnswersList.get(randomNum);
+            System.out.println(answerBot);
+            stringBuilder.append(System.lineSeparator() + answerBot);
+
+        } while (!str.contains(OUT));
+        // читам здесь стринг билдер и пишем его в файл! Вуаля!!! хахахах
+        System.out.println(stringBuilder.toString());
         // при завершении работы записываем лог в файл
-        saveLog(Collections.singletonList(path));
+        //saveLog(Collections.singletonList(path));
     }
 
     /**
@@ -99,40 +135,25 @@ public class ConsoleChat {
 
     }
 
-    private List<String> talkWithUser() {
-        List<String> listUserPhrase = new ArrayList<>();
-//        InputStream stream = System.in;
-//        Scanner console = new Scanner(stream);
-//        String line = console.nextLine();
-//        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader((System.in)))) {
-//        }))) {
-////            InputStream stream = System.in;
-////            InputStreamReader reader = new InputStreamReader(stream);
-////            BufferedReader bufferedReader = new BufferedReader(reader);
-////            String line = bufferedReader.readLine();
-////            return line;
+//    private List<String> talkWithUser() {
+//        List<String> listUserPhrase = new ArrayList<>();
+//        try (BufferedReader obj = new BufferedReader(
+//                new InputStreamReader(System.in))) {
+//            String str;
+//
+//            do {
+//                str = obj.readLine();
+//                System.err.println(str);
+//            } while (!str.equals("закончить"));
+//            return listUserPhrase;
 //
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-        try (BufferedReader obj = new BufferedReader(
-                new InputStreamReader(System.in))) {
-            String str;
-            System.out.println("Enter lines of text");
-            System.out.println("Enter 'stop' to quit");
-            do {
-                str = obj.readLine();
-                System.err.println(str);
-            } while (!str.equals("stop"));
-            return listUserPhrase;
+//        return listUserPhrase;
+//    }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String path = "C:\\projects\\job4j_design\\data\\DialogLog.txt";
         String botAnswers = "C:\\projects\\job4j_design\\data\\phraseForChatBot.txt";
         ConsoleChat cc = new ConsoleChat(path, botAnswers);
