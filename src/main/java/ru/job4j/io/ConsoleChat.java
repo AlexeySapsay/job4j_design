@@ -2,6 +2,7 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.nio.Buffer;
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -105,9 +106,11 @@ public class ConsoleChat {
 
         } while (!str.contains(OUT));
         // читам здесь стринг билдер и пишем его в файл! Вуаля!!! хахахах
-        System.out.println(stringBuilder.toString());
+        //System.out.println(stringBuilder.toString());
         // при завершении работы записываем лог в файл
         //saveLog(Collections.singletonList(path));
+
+        saveLog(Collections.singletonList(stringBuilder.toString()));
     }
 
     /**
@@ -132,7 +135,13 @@ public class ConsoleChat {
      * @param log лог для сохранения
      */
     private void saveLog(List<String> log) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(path, Charset.forName("UTF-8"), true))) {
+            log.forEach(pw::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        System.out.println("Файл сохранен!");
     }
 
 //    private List<String> talkWithUser() {
