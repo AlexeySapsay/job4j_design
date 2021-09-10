@@ -19,7 +19,14 @@ import java.nio.file.Path;
 
 public class DuplicatesFinder {
     public static void main(String[] args) throws IOException {
-        Path start = Path.of("./");
+        if (args.length == 0) {
+            throw new IllegalArgumentException(
+                    "You have a mistake in line:"
+                            + System.lineSeparator()
+                            + "Use : java -jar duplicatesFinder.jar directoryName_for_scan");
+        }
+
+        Path start = Path.of(args[0]);
         Files.walkFileTree(start, new DuplicatesVisitor());
     }
 }

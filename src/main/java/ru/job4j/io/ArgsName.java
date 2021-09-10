@@ -2,6 +2,7 @@ package ru.job4j.io;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * https://job4j.ru/profile/exercise/45/task-view/317
@@ -25,6 +26,10 @@ public class ArgsName {
      */
     public String get(String key) {
         return values.get(key);
+    }
+
+    public Set<String> getKeys() {
+        return values.keySet();
     }
 
     private void parse(String[] args) {
@@ -78,6 +83,6 @@ public class ArgsName {
         }
     }
 
-    public static void main(String[] args) {
-    }
+//    public static void main(String[] args) {
+//    }
 }

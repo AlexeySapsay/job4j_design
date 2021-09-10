@@ -1,10 +1,12 @@
 package ru.job4j.io;
 
-import java.awt.geom.IllegalPathStateException;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -33,38 +35,33 @@ import java.util.zip.ZipOutputStream;
  * @since 09.09.2021
  */
 public class Zip {
-//    Search search;
-//
-//    public Zip() {
-//        search = new Search();
-//    }
-    //Search.search();
+    public static List<Path> fileList = new ArrayList<>();
+
     /**
-     * Не понимаю смысл этого метода. У меня есть несколько идей,
-     * что он должен делать.
-     *
-     * 1. Метод принимает лист файлов для упаковки. Лист файлов находит метод
-     * Search
-     * 2. Метод
+     * Метод получает arrayList файлов для упаковки и поочередно упаковывает
+     * каждый файл
      *
      * @param sources возможно лист файлов, найденный Search
-     * @param target файл после упаковки
+     * @param target  файл после упаковки
      */
-    public static void packFiles(List<File> sources, File target) {
-
+    public void packFiles(List<Path> sources, Path target) {
+        for (Path file : sources) {
+            packSingleFile(file, target);
+        }
     }
 
     /**
      * В метод передаю единичный файл, на выходе получаю его зип архив
-     * @param source
-     * @param target
+     *
+     * @param source источник, файл для архивации
+     * @param target целевой, файл после архивации
      */
-    public static void packSingleFile(File source, File target) {
+    public static void packSingleFile(Path source, Path target) {
         try (ZipOutputStream zip = new ZipOutputStream(
-                new BufferedOutputStream(new FileOutputStream(target)))) {
-            zip.putNextEntry(new ZipEntry(source.getPath()));
+                new BufferedOutputStream(new FileOutputStream(String.valueOf(target))))) {
+            zip.putNextEntry(new ZipEntry(source.toFile().getPath()));
             try (BufferedInputStream out = new BufferedInputStream(
-                    new FileInputStream(source))) {
+                    new FileInputStream(String.valueOf(source)))) {
                 zip.write(out.readAllBytes());
             }
         } catch (Exception e) {
@@ -74,13 +71,14 @@ public class Zip {
 
     /**
      * Валидация входных параметров, именнованных аргументов и пути директории
-     * @param args массив String именнованных аргументов, получаемых
-     *             с консоли
+     *
+     * @param args    массив String именнованных аргументов, получаемых
+     *                с консоли
      * @param dirPath путь к директории, для архивации
      * @throws FileNotFoundException исплючение,
-     *          когда директория не существует
+     *                               когда директория не существует
      */
-    public static void validationArgsAndDir(String[] args, Path dirPath) throws FileNotFoundException {
+    public static void validationArgsAndDir(String[] args, Path dirPath) throws IOException {
         // Валидация агрументов. В args должно присутствовать 4 аргумента
         if (args.length != 4) {
             throw new IllegalArgumentException(" Arguments is not correct:"
@@ -102,13 +100,27 @@ public class Zip {
         if (!Files.exists(dirPath)) {
             throw new FileNotFoundException("The Director or file not exist");
         }
+
+        // Валидация корректности расположения аргументов
+        ArgsName argsMap = ArgsName.of(args);
+        Set<String> argsKeysSet = argsMap.getKeys();
+        for (String key : argsKeysSet) {
+            if (!"d".equals(key) && !"e".equals(key) && !"o".equals(key)) {
+                throw new IllegalArgumentException("Use like: "
+                        + System.lineSeparator()
+                        + "-d= directory for arhivation, -e= exclude files, -o= output file name ");
+            }
+        }
     }
 
-    public static void main(String[] args) {
-        System.out.println(args);
-        packSingleFile(
-                new File(".pom.xml"),
-                new File(".pom.zip")
-        );
+    public static void main(String[] args) throws IOException {
+
+        ArgsName argsMap2 = ArgsName.of(args);
+        validationArgsAndDir(args, Path.of(argsMap2.get("d")));
+
+        fileList = Search.search(Path.of(argsMap2.get("d")),
+                p -> !p.toFile().getName().endsWith(argsMap2.get("e")));
+        Zip zip = new Zip();
+        zip.packFiles(fileList, Path.of(ArgsName.of(args).get("o")));
     }
 }
