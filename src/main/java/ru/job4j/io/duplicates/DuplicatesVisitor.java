@@ -27,8 +27,6 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     public FileVisitResult visitFile(Path file, BasicFileAttributes atts) throws IOException {
         FileProperty fileProperty = new FileProperty(Files.size(file),
                 file.getFileName().toString());
-
-        // при нахождении дупликата выводим имя на консоль
         if (!filePropertySet.add(fileProperty)) {
             System.out.println(fileProperty.getName() + " is a duplicate");
         }

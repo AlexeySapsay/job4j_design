@@ -52,19 +52,12 @@ public class FileProperty {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        // здесь переопределение equals начинает отличаться от
-        // описанного в задании
-        // переписал из задания
         FileProperty that = (FileProperty) o;
         return size == that.size && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-//        int result = (int) (size ^ (size >>> 32));
-//        result = 31 * result + (name != null ? name.hashCode() : 0);
-//        return result;
-        //хэшкод так же отличается от задания
         return Objects.hash(size, name);
     }
 
