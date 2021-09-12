@@ -72,7 +72,6 @@ public class ArgsName {
 
             String[] strings;
             strings = str.split("=");
-            //System.out.println("strings.length : " + strings.length);
             if (strings.length != 2) {
                 throw new IllegalArgumentException(
                         System.lineSeparator()
