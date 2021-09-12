@@ -5,7 +5,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * https://job4j.ru/profile/exercise/45/task-view/319
@@ -45,7 +44,7 @@ public class ConsoleChat {
     /**
      * run(), содержит логику чата;
      * Читаем фразы пользователя.
-     * после сохраняем диалов в txt файле.
+     * после сохраняет диалог в txt файле.
      */
     public void run() {
         List<String> botAnswersList = readPhrases();
@@ -54,7 +53,8 @@ public class ConsoleChat {
 
         try (BufferedReader obj = new BufferedReader(new InputStreamReader(System.in))) {
             do {
-                // читаем фразу пользователя, пока не введено управляющее слово
+                // читаем фразу пользователя и отвечаем случайной фразой бота,
+                // пока не введено управляющее слово
                 str = obj.readLine();
                 stringBuilder.append(System.lineSeparator()).append(str);
 
@@ -67,8 +67,8 @@ public class ConsoleChat {
                     }
                 }
 
-                // генератор случайных ответов на фразы пользователя
-                int randomNum = ThreadLocalRandom.current().nextInt(1, botAnswersList.size());
+                // генератор случайных ответов бота на фразы пользователя
+                int randomNum = (int) (Math.random() * botAnswersList.size());
                 String answerBot = botAnswersList.get(randomNum);
                 System.out.println(answerBot);
                 stringBuilder.append(System.lineSeparator()).append(answerBot);

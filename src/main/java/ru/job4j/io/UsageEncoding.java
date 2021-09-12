@@ -1,0 +1,58 @@
+package ru.job4j.io;
+
+import java.io.*;
+import java.nio.charset.Charset;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * https://job4j.ru/profile/exercise/45/task-view/319
+ * Изучение работы с потоками ввода- вывода.
+ * Кодировка UTF-8
+ *
+ * @author AlexSapsay (sapsayalexey@gmail.com)
+ * @version 1.0
+ * @since 10.09.2021
+ */
+public class UsageEncoding {
+    public String readFile(String path) {
+        StringBuilder builder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(
+                new FileReader(path, Charset.forName("WINDOWS-1251")))) {
+            br.lines().forEach(builder::append);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return builder.toString();
+    }
+
+    public void writeDataInFile(String path, List<String> data) {
+        try (PrintWriter pw = new PrintWriter(
+                new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
+           data.forEach(pw::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        //String path = "C:\\projects\\job4j_design\\data\\text.txt";
+        //String path = "./src/data/text.txt";
+        String path = "C:\\projects\\job4j_design\\data\\text1.txt";
+        UsageEncoding encoding = new UsageEncoding();
+        List<String> strings = List.of(
+                "Новая строка 1",
+                "Новая строка 2",
+                "Новая строка 3",
+                "Новая строка 4",
+                "Новая строка 5"
+        );
+        for (String str : strings) {
+            encoding.writeDataInFile(path, Collections.singletonList(str));
+        }
+        String s = encoding.readFile(path);
+        System.out.println("Данные из файла: ");
+        System.out.println(s);
+    }
+}
+
