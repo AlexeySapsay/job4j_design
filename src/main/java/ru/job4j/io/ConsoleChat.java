@@ -50,10 +50,16 @@ public class ConsoleChat {
     public void run() throws IOException {
         List<String> botAnswersList = readPhrases();
         StringBuilder stringBuilder = new StringBuilder();
-        BufferedReader obj = new BufferedReader(new InputStreamReader(System.in));
         String str;
+        try (BufferedReader obj = new BufferedReader(new InputStreamReader(System.in))) {
+           str = obj.readLine();// возможно удалить
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         do {
             // читаем фразу пользователя, пока не введено управляющее слово
+
             str = obj.readLine();
             stringBuilder.append(System.lineSeparator()).append(str);
             while (str.contains(STOP)) {
@@ -69,7 +75,9 @@ public class ConsoleChat {
             String answerBot = botAnswersList.get(randomNum);
             System.out.println(answerBot);
             stringBuilder.append(System.lineSeparator()).append(answerBot);
-        } while (!str.contains(OUT));
+            //находим "закончить" true+true= true, делаем !true = false, завершит цилк на out слове
+        } while (!(str.trim().length() == 9 && str.contains(OUT)));
+        System.out.println("str.length(): " + str.length());
         saveLog(Collections.singletonList(stringBuilder.toString()));
     }
 
@@ -105,8 +113,8 @@ public class ConsoleChat {
     }
 
     public static void main(String[] args) throws IOException {
-        String path = "C:\\projects\\job4j_design\\data\\DialogLog.txt";
-        String botAnswers = "C:\\projects\\job4j_design\\data\\phraseForChatBot.txt";
+        String path = ".\\data\\DialogLog.txt";
+        String botAnswers = ".\\data\\phraseForChatBot.txt";
         ConsoleChat cc = new ConsoleChat(path, botAnswers);
         cc.run();
     }
