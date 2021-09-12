@@ -47,16 +47,18 @@ public class ConsoleChat {
      * Читаем фразы пользователя.
      * после сохраняем диалов в txt файле.
      */
-    public void run() throws IOException {
+    public void run() {
         List<String> botAnswersList = readPhrases();
         StringBuilder stringBuilder = new StringBuilder();
         String str;
+
         try (BufferedReader obj = new BufferedReader(new InputStreamReader(System.in))) {
             do {
                 // читаем фразу пользователя, пока не введено управляющее слово
                 str = obj.readLine();
                 stringBuilder.append(System.lineSeparator()).append(str);
-                while (str.contains(STOP)) {
+
+                if (str.contains(STOP)) {
                     str = obj.readLine();
                     stringBuilder.append(System.lineSeparator()).append(str);
                     while (!str.contains(CONTINUE)) {
@@ -64,6 +66,7 @@ public class ConsoleChat {
                         stringBuilder.append(System.lineSeparator()).append(str);
                     }
                 }
+
                 // генератор случайных ответов на фразы пользователя
                 int randomNum = ThreadLocalRandom.current().nextInt(1, botAnswersList.size());
                 String answerBot = botAnswersList.get(randomNum);
@@ -71,6 +74,7 @@ public class ConsoleChat {
                 stringBuilder.append(System.lineSeparator()).append(answerBot);
                 //находим "закончить" true+true= true, делаем !true = false, завершит цилк на out слове
             } while (!(str.trim().length() == 9 && str.contains(OUT)));
+
             System.out.println("str.length(): " + str.length());
             saveLog(Collections.singletonList(stringBuilder.toString()));
         } catch (Exception e) {
@@ -109,7 +113,7 @@ public class ConsoleChat {
         System.out.println("Файл сохранен!");
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String path = ".\\data\\DialogLog.txt";
         String botAnswers = ".\\data\\phraseForChatBot.txt";
         ConsoleChat cc = new ConsoleChat(path, botAnswers);
