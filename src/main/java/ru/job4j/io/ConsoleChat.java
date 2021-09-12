@@ -52,7 +52,6 @@ public class ConsoleChat {
         StringBuilder stringBuilder = new StringBuilder();
         String str;
         try (BufferedReader obj = new BufferedReader(new InputStreamReader(System.in))) {
-            //str = obj.readLine();// возможно удалить
             do {
                 // читаем фразу пользователя, пока не введено управляющее слово
                 str = obj.readLine();
