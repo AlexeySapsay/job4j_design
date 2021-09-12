@@ -8,24 +8,28 @@ import static org.hamcrest.Matchers.is;
 public class ArgsNameTest {
     @Test
     public void whenGetFirst() {
-        ArgsName jvm = ArgsName.of(new String[] {"-Xmx=512", "-encoding=UTF-8"});
+        ArgsName argsName = new ArgsName();
+        ArgsName jvm = argsName.of(new String[] {"-Xmx=512", "-encoding=UTF-8"});
         assertThat(jvm.get("Xmx"), is("512"));
     }
 
     @Test
     public void whenGetFirstReorder() {
-        ArgsName jvm = ArgsName.of(new String[] {"-encoding=UTF-8", "-Xmx=512"});
+        ArgsName argsName = new ArgsName();
+        ArgsName jvm = argsName.of(new String[] {"-encoding=UTF-8", "-Xmx=512"});
         assertThat(jvm.get("Xmx"), is("512"));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenGetNotExist() {
-        ArgsName jvm = ArgsName.of(new String[] {});
+        ArgsName argsName = new ArgsName();
+        ArgsName jvm = argsName.of(new String[] {});
         jvm.get("Xmx");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenWrongSomeArgument() {
-        ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "-Xmx="});
+        ArgsName argsName = new ArgsName();
+        ArgsName jvm = argsName.of(new String[] {"-enconding=UTF-8", "-Xmx="});
     }
 }

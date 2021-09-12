@@ -45,7 +45,7 @@ public class ArgsName {
         }
     }
 
-    public static ArgsName of(String[] args) {
+    public ArgsName of(String[] args) {
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
@@ -57,7 +57,7 @@ public class ArgsName {
      *
      * @param args параметры, полученные из терминала или командной строки
      */
-    public static void validation(String[] args) {
+    public void validation(String[] args) {
         if (args.length != 2) {
             throw new IllegalArgumentException(" Arguments is not correct:"
                     + System.lineSeparator()
@@ -72,17 +72,18 @@ public class ArgsName {
 
             String[] strings;
             strings = str.split("=");
-            System.out.println("strings.length : " + strings.length);
+            //System.out.println("strings.length : " + strings.length);
             if (strings.length != 2) {
                 throw new IllegalArgumentException(
                         System.lineSeparator()
-                                + "That form arguments is not correct:     -Xmx=   OR    =514"
+                                + "That form arguments is not correct: -Xmx= OR =514"
                                 + System.lineSeparator()
                                 + "Use argument like this: -Xmx=514");
             }
         }
     }
 
-//    public static void main(String[] args) {
-//    }
+    public static void main(String[] args) {
+
+    }
 }
