@@ -52,33 +52,31 @@ public class ConsoleChat {
         StringBuilder stringBuilder = new StringBuilder();
         String str;
         try (BufferedReader obj = new BufferedReader(new InputStreamReader(System.in))) {
-           str = obj.readLine();// возможно удалить
+            //str = obj.readLine();// возможно удалить
+            do {
+                // читаем фразу пользователя, пока не введено управляющее слово
+                str = obj.readLine();
+                stringBuilder.append(System.lineSeparator()).append(str);
+                while (str.contains(STOP)) {
+                    str = obj.readLine();
+                    stringBuilder.append(System.lineSeparator()).append(str);
+                    while (!str.contains(CONTINUE)) {
+                        str = obj.readLine();
+                        stringBuilder.append(System.lineSeparator()).append(str);
+                    }
+                }
+                // генератор случайных ответов на фразы пользователя
+                int randomNum = ThreadLocalRandom.current().nextInt(1, botAnswersList.size());
+                String answerBot = botAnswersList.get(randomNum);
+                System.out.println(answerBot);
+                stringBuilder.append(System.lineSeparator()).append(answerBot);
+                //находим "закончить" true+true= true, делаем !true = false, завершит цилк на out слове
+            } while (!(str.trim().length() == 9 && str.contains(OUT)));
+            System.out.println("str.length(): " + str.length());
+            saveLog(Collections.singletonList(stringBuilder.toString()));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        do {
-            // читаем фразу пользователя, пока не введено управляющее слово
-
-            str = obj.readLine();
-            stringBuilder.append(System.lineSeparator()).append(str);
-            while (str.contains(STOP)) {
-                str = obj.readLine();
-                stringBuilder.append(System.lineSeparator()).append(str);
-                while (!str.contains(CONTINUE)) {
-                    str = obj.readLine();
-                    stringBuilder.append(System.lineSeparator()).append(str);
-                }
-            }
-            // генератор случайных ответов на фразы пользователя
-            int randomNum = ThreadLocalRandom.current().nextInt(1, botAnswersList.size());
-            String answerBot = botAnswersList.get(randomNum);
-            System.out.println(answerBot);
-            stringBuilder.append(System.lineSeparator()).append(answerBot);
-            //находим "закончить" true+true= true, делаем !true = false, завершит цилк на out слове
-        } while (!(str.trim().length() == 9 && str.contains(OUT)));
-        System.out.println("str.length(): " + str.length());
-        saveLog(Collections.singletonList(stringBuilder.toString()));
     }
 
     /**
