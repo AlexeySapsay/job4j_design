@@ -53,8 +53,6 @@ public class ConsoleChat {
 
         try (BufferedReader obj = new BufferedReader(new InputStreamReader(System.in))) {
             do {
-                // читаем фразу пользователя и отвечаем случайной фразой бота,
-                // пока не введено управляющее слово
                 str = obj.readLine();
                 stringBuilder.append(System.lineSeparator()).append(str);
 
@@ -67,12 +65,11 @@ public class ConsoleChat {
                     }
                 }
 
-                // генератор случайных ответов бота на фразы пользователя
                 int randomNum = (int) (Math.random() * botAnswersList.size());
                 String answerBot = botAnswersList.get(randomNum);
                 System.out.println(answerBot);
                 stringBuilder.append(System.lineSeparator()).append(answerBot);
-                //находим "закончить" true+true= true, делаем !true = false, завершит цилк на out слове
+
             } while (!(str.trim().length() == 9 && str.contains(OUT)));
 
             System.out.println("str.length(): " + str.length());
