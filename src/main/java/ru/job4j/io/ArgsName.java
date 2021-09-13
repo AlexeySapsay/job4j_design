@@ -17,7 +17,6 @@ import java.util.Set;
 
 public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
-
     /**
      * Геттер для получения значения value по ключу key
      *
