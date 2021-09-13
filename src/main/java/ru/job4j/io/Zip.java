@@ -1,9 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -79,8 +77,8 @@ public class Zip {
      *                               когда директория не существует
      */
     public static void validationArgsAndDir(String[] args, Path dirPath) throws IOException {
-        // Валидация агрументов. В args должно присутствовать 4 аргумента
-        if (args.length != 4) {
+        // Валидация агрументов. В args должно присутствовать 3 аргумента
+        if (args.length != 3) {
             throw new IllegalArgumentException(" Arguments is not correct:"
                     + System.lineSeparator()
                     + "Example:"
@@ -93,16 +91,14 @@ public class Zip {
                     + System.lineSeparator()
                     + "-o - output - во что мы архивируем.");
         }
-        // Валидация аргументов. Проверка целостности аргументов
-        ArgsName.validation(args);
-
         // Валидация существования архивируемой дирректориии.
-        if (!Files.exists(dirPath)) {
+        if (!dirPath.toFile().isDirectory()) {
             throw new FileNotFoundException("The Director or file not exist");
         }
 
         // Валидация корректности расположения аргументов
-        ArgsName argsMap = ArgsName.of(args);
+        ArgsName argsName = new ArgsName();
+        ArgsName argsMap = argsName.of(args);
         Set<String> argsKeysSet = argsMap.getKeys();
         for (String key : argsKeysSet) {
             if (!"d".equals(key) && !"e".equals(key) && !"o".equals(key)) {
@@ -114,13 +110,14 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
-
-        ArgsName argsMap2 = ArgsName.of(args);
+        ArgsName argsName = new ArgsName();
+        ArgsName argsMap2 = argsName.of(args);
         validationArgsAndDir(args, Path.of(argsMap2.get("d")));
 
-        fileList = Search.search(Path.of(argsMap2.get("d")),
+        Search search = new Search();
+        fileList = search.search(Path.of(argsMap2.get("d")),
                 p -> !p.toFile().getName().endsWith(argsMap2.get("e")));
         Zip zip = new Zip();
-        zip.packFiles(fileList, Path.of(ArgsName.of(args).get("o")));
+        zip.packFiles(fileList, Path.of(argsName.of(args).get("o")));
     }
 }
