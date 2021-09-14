@@ -4,6 +4,9 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * https://job4j.ru/profile/exercise/46/task-view/320
  *
@@ -12,7 +15,9 @@ import java.net.Socket;
  * @since 14.09.2021
  */
 public class EchoServer {
-    public static void main(String[] args) throws IOException {
+    private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
+
+    public static void main(String[] args) {
         try (ServerSocket server = new ServerSocket(9000)) {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
@@ -46,11 +51,11 @@ public class EchoServer {
                         server.close();
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.error("Exception in log example: ", e);
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception in log example: ", e);
         }
     }
 }
