@@ -17,6 +17,7 @@ import java.util.Set;
 
 public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
+
     /**
      * Геттер для получения значения value по ключу key
      *
@@ -29,6 +30,7 @@ public class ArgsName {
 
     /**
      * Метод получения множества ключей
+     *
      * @return множество ключей из values
      */
     public Set<String> getKeys() {
@@ -60,8 +62,8 @@ public class ArgsName {
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
-
     }
+
     public static void main(String[] args) {
     }
 }
