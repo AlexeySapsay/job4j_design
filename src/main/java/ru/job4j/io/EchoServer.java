@@ -23,37 +23,34 @@ public class EchoServer {
                     String serverAnswer = "";
                     String[] bufferArray = new String[0];
                     boolean serverClose = false;
+
                     while (!(string).isEmpty()) {
                         System.out.println(string);
                         if (string.contains("?msg=")) {
                             bufferArray = string.split(" ");
-                            if (bufferArray[1].substring(6).equals("Bye")) {
-                                //serverAnswer = "Byeeeeeeeee!";
-                                out.write("Byeeeeeeeee, dear friend.".getBytes());
+                            if (bufferArray[1].substring(6).equals("Exit")) {
+                                serverAnswer = "Byeeeeeeeee!";
                                 serverClose = true;
                             } else if (bufferArray[1].substring(6).equals("Hello")) {
-                                //serverAnswer = "Hello";
-                                out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                                out.write("Hello, dear friend.".getBytes());
+                                serverAnswer = "Hello";
                             } else {
-                                //serverAnswer = "What";
-                                out.write("What".getBytes());
+                                serverAnswer = "What";
                             }
                         }
                         string = in.readLine();
                     }
 
-                    //out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-
+                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                    out.write(serverAnswer.getBytes());
                     if (serverClose) {
                         server.close();
                     }
-//                    for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
-//                        System.out.println(str);
-//                    }
-                    //out.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
