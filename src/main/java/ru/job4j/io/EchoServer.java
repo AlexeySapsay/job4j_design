@@ -22,20 +22,36 @@ public class EchoServer {
                     String string = in.readLine();
                     String serverAnswer = "";
                     String[] bufferArray = new String[0];
-                    if (!string.isEmpty() && string.contains("?msg=")) {
-                        bufferArray = string.split(" ");
+                    boolean serverClose = false;
+                    while (!(string).isEmpty()) {
+                        System.out.println(string);
+                        if (string.contains("?msg=")) {
+                            bufferArray = string.split(" ");
+                            if (bufferArray[1].substring(6).equals("Bye")) {
+                                //serverAnswer = "Byeeeeeeeee!";
+                                out.write("Byeeeeeeeee, dear friend.".getBytes());
+                                serverClose = true;
+                            } else if (bufferArray[1].substring(6).equals("Hello")) {
+                                //serverAnswer = "Hello";
+                                out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                                out.write("Hello, dear friend.".getBytes());
+                            } else {
+                                //serverAnswer = "What";
+                                out.write("What".getBytes());
+                            }
+                        }
+                        string = in.readLine();
                     }
-                    if (bufferArray[1].substring(6).equals("Bye")) {
-                        serverAnswer = "Byeeeeeeeee!\r\n\r\n";
-                        out.write(serverAnswer.getBytes());
-                        out.flush();
+
+                    //out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+
+                    if (serverClose) {
                         server.close();
                     }
-                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                    for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
-                        System.out.println(str);
-                    }
-                    out.flush();
+//                    for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
+//                        System.out.println(str);
+//                    }
+                    //out.flush();
                 }
             }
         }
