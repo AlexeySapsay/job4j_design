@@ -24,7 +24,6 @@ public class Search {
         Search searchInstance = new Search();
         // валидация входных параметров
         searchInstance.validation(args);
-
         // Начальная папка передавалась через аргументы запуска,
         // указываемыми параметроами в  терминале или командной строке.
         Path start = Paths.get(args[0]);
