@@ -57,10 +57,10 @@ public class Zip {
     public static void packSingleFile(Path source, Path target) {
         try (ZipOutputStream zip = new ZipOutputStream(
                 new BufferedOutputStream(new FileOutputStream(String.valueOf(target))))) {
-            zip.putNextEntry(new ZipEntry(source.toFile().getPath()));
-            try (BufferedInputStream out = new BufferedInputStream(
+                zip.putNextEntry(new ZipEntry(source.toFile().getPath()));
+                try (BufferedInputStream out = new BufferedInputStream(
                     new FileInputStream(String.valueOf(source)))) {
-                zip.write(out.readAllBytes());
+                        zip.write(out.readAllBytes());
             }
         } catch (Exception e) {
             e.printStackTrace();
