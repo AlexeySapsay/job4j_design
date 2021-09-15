@@ -29,6 +29,8 @@ public class EchoServer {
                     String[] bufferArray = new String[0];
                     boolean serverClose = false;
 
+                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+
                     while (!(string).isEmpty()) {
                         System.out.println(string);
                         if (string.contains("?msg=")) {
@@ -44,8 +46,6 @@ public class EchoServer {
                         }
                         string = in.readLine();
                     }
-
-                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     out.write(serverAnswer.getBytes());
                     if (serverClose) {
                         server.close();
