@@ -71,7 +71,6 @@ public class Contact implements Serializable {
             System.out.println("contact.equals(contactFromFile): "
                     + contact.equals(contactFromFile));
         }
-
     }
 }
 
