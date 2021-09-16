@@ -26,7 +26,7 @@ public class EchoServer {
                              new InputStreamReader(socket.getInputStream()))) {
                     String string = in.readLine();
                     String serverAnswer = "";
-                    String[] bufferArray = new String[0];
+                    String[] bufferArray;
                     boolean serverClose = false;
 
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
