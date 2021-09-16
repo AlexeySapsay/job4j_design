@@ -2,6 +2,7 @@ package ru.job4j.serialization.java;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.util.Objects;
 
 public class Contact implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -43,7 +44,7 @@ public class Contact implements Serializable {
         if (zipCode != contact.zipCode) {
             return false;
         }
-        return phone != null ? phone.equals(contact.phone) : contact.phone == null;
+        return Objects.equals(phone, contact.phone);
     }
 
     @Override
