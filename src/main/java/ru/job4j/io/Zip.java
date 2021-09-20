@@ -33,7 +33,7 @@ import java.util.zip.ZipOutputStream;
  * @since 09.09.2021
  */
 public class Zip {
-    public static List<Path> fileList = new ArrayList<>();
+    private static List<Path> fileList = new ArrayList<>();
 
     /**
      * Метод получает arrayList файлов для упаковки и поочередно упаковывает
@@ -43,8 +43,16 @@ public class Zip {
      * @param target  файл после упаковки
      */
     public void packFiles(List<Path> sources, Path target) {
-        for (Path file : sources) {
-            packSingleFile(file, target);
+        try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(
+                new FileOutputStream(String.valueOf(target))))) {
+            for (Path file : sources) {
+                zip.putNextEntry(new ZipEntry(file.toString()));
+                try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(String.valueOf(file)))) {
+                    zip.write(out.readAllBytes());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -57,10 +65,10 @@ public class Zip {
     public static void packSingleFile(Path source, Path target) {
         try (ZipOutputStream zip = new ZipOutputStream(
                 new BufferedOutputStream(new FileOutputStream(String.valueOf(target))))) {
-                zip.putNextEntry(new ZipEntry(source.toFile().getPath()));
-                try (BufferedInputStream out = new BufferedInputStream(
+            zip.putNextEntry(new ZipEntry(source.toFile().getPath()));
+            try (BufferedInputStream out = new BufferedInputStream(
                     new FileInputStream(String.valueOf(source)))) {
-                        zip.write(out.readAllBytes());
+                zip.write(out.readAllBytes());
             }
         } catch (Exception e) {
             e.printStackTrace();
