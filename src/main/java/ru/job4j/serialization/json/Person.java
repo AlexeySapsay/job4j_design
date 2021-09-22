@@ -1,17 +1,18 @@
 package ru.job4j.serialization.json;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
 /**
  * https://job4j.ru/profile/exercise/174/task-view/327
+ * https://job4j.ru/profile/exercise/174/task-view/330
  * JSON сериализация и десериализация
+ * Преобразование JSON в POJO. JsonObject
  *
  * @author AlexSapsay (sapsayalexey@gmail.com)
  * @version 1.0
- * @since 15.09.2021
+ * @since 22.09.2021
  */
 
 public class Person {
@@ -37,28 +38,33 @@ public class Person {
                 + '}';
     }
 
+    public boolean getSex() {
+        return sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public String[] getStatuses() {
+        return statuses;
+    }
+
     public static void main(String[] args) {
         final Person person = new Person(false,
                 30, new Contact("11-111"),
                 "Worker", "Married");
 
-        /* Преобразуем объект person в json-строку. */
-        final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(person));
-
-        /* Модифицируем json-строку */
-        final String personJson =
-                "{"
-                        + "\"sex\":false,"
-                        + "\"age\":35,"
-                        + "\"contact\":"
-                        + "{"
-                        + "\"phone\":\"+7(924)111-111-11-11\""
-                        + "},"
-                        + "\"statuses\":"
-                        + "[\"Student\",\"Free\"]"
-                        + "}";
-        final Person personMod = gson.fromJson(personJson, Person.class);
-        System.out.println(personMod);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("sex", person.getSex());
+        jsonObject.put("age", person.getAge());
+        jsonObject.put("contact", person.getContact());
+        jsonObject.put("statuses", person.getStatuses());
+        System.out.println(jsonObject);
+        System.out.println(new JSONObject(person));
     }
 }
