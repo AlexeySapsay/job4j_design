@@ -174,27 +174,27 @@ public class TableEditor implements AutoCloseable {
 
         TableEditor tableEditor = new TableEditor(properties);
         System.out.println("--- Создаем тестовую таблицу без полей---");
-        tableEditor.createTable("Test_table1");
+        tableEditor.createTable("user1");
         System.out.println("--- Таблица созданна ---");
 
-        System.out.println("--- Удаляем таблицу Test_table1---");
-        tableEditor.dropTable("Test_table1");
-        System.out.println("--- Таблица удаленна---");
+//        System.out.println("--- Удаляем таблицу Test_table1---");
+//        tableEditor.dropTable("Test_table1");
+//        System.out.println("--- Таблица удаленна---");
 
-        System.out.println("--- Создаем тестовую таблицу без полей---");
-        tableEditor.createTable("Test_table1");
-        System.out.println("--- Таблица созданна ---");
+//        System.out.println("--- Создаем тестовую таблицу без полей---");
+//        tableEditor.createTable("Test_table1");
+//        System.out.println("--- Таблица созданна ---");
 
-        System.out.println("--- Добравляем колонку в таблицу ---");
-        tableEditor.addColumn("Test_table1", "adding", "INT");
-        System.out.println("--- Колонка добавленна ---");
+//        System.out.println("--- Добравляем колонку в таблицу ---");
+//        tableEditor.addColumn("Test_table1", "adding", "INT");
+//        System.out.println("--- Колонка добавленна ---");
 
-        System.out.println("--- Удаляем колонку  ---");
-        tableEditor.dropColumn("Test_table1", "adding");
-        System.out.println("--- Колонка удалена ---");
+//        System.out.println("--- Удаляем колонку  ---");
+//        tableEditor.dropColumn("Test_table1", "xxx");
+//        System.out.println("--- Колонка удалена ---");
 
-        System.out.println("--- Переименновываем колонку  ---");
-        tableEditor.renameColumn("Test_table1", "adding1", "XXX");
-        System.out.println("--- Колонка переименнованна ---");
+//        System.out.println("--- Переименновываем колонку  ---");
+//        tableEditor.renameColumn("Test_table1", "adding1", "XXX");
+//        System.out.println("--- Колонка переименнованна ---");
     }
 }
