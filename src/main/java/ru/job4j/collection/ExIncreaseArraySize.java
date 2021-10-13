@@ -17,24 +17,18 @@ public class ExIncreaseArraySize {
 
         for (int i = 0; i < 10; i++) {
             if (arrayInt.length <= counter) {
-                //int[] bufferArray = new int[arrayInt.length + 1];
                 int[] bufferArray = Arrays.copyOf(arrayInt, arrayInt.length + 1);
-                //bufferArray = arrayInt;
                 System.out.println("bufferArray length after resize:" + bufferArray.length);
                 arrayInt = Arrays.copyOf(bufferArray, bufferArray.length);
-                //arrayInt = new int[arrayInt.length + 1];
                 System.out.println(" arrayInt length after resize:" + arrayInt.length);
                 arrayInt[counter++] = i;
             } else {
                 arrayInt[counter++] = i;
-                //System.out.println("buffer array length after resize:" + bufferArray.length);
-                //arrayInt = new int[arrayInt.length + 1];
                 System.out.println("buffer array length :" + arrayInt.length);
             }
         }
         for (int i = 0; i < arrayInt.length; i++) {
             System.out.print(arrayInt[i] + " ");
         }
-        //System.out.println("arrayInt:" + arrayInt.toString());
     }
 }

@@ -135,7 +135,7 @@ public class SimpleArray<T> implements Iterable<T> {
         if (expectedModCount != that.expectedModCount) {
             return false;
         }
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        /* Probably incorrect - comparing Object[] arrays with Arrays.equals*/
         return Arrays.equals(objArray, that.objArray);
     }
 
@@ -158,17 +158,16 @@ public class SimpleArray<T> implements Iterable<T> {
                 + '}';
     }
 
-
-//    public static void main(String[] args) {
-//        var list = new SimpleArray<Integer>();
-//        System.out.println(list);
-//        for (var i = 0; i <= 10; i++) {
-//            list.add(i);
-//        }
-//        System.out.println(list);
-//        for (var i = 0; i < 10; i++) {
-//            list.remove(0);
-//        }
-//        System.out.println(list);
-//    }
+    public static void main(String[] args) {
+        var list = new SimpleArray<Integer>();
+        System.out.println(list);
+        for (var i = 0; i <= 10; i++) {
+            list.add(i);
+        }
+        System.out.println(list);
+        for (var i = 0; i < 10; i++) {
+            list.remove(0);
+        }
+        System.out.println(list);
+    }
 }

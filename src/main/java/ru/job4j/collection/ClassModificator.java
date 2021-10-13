@@ -1,6 +1,6 @@
 package ru.job4j.collection;
 
-// public or default
+/* public or default*/
 class ClassModificator {
     public class Local {
 
