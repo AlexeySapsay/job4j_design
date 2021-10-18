@@ -4,10 +4,10 @@ import org.junit.Test;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 public class ForwardLinkedTest {
     @Test(expected = NoSuchElementException.class)
@@ -51,7 +51,6 @@ public class ForwardLinkedTest {
         assertThat(linked.deleteFirst(), is(2));
     }
 
-    //Tests for revert method
     @Test
     public void whenAddThenIter() {
         ForwardLinked<Integer> linked = new ForwardLinked<>();

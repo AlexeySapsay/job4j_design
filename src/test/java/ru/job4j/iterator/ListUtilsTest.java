@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ListUtilsTest {
-    // forward tests for method          AddBefore
     @Test
     public void whenAddBefore() {
         List<Integer> input = new ArrayList<>(Arrays.asList(1, 3));
@@ -54,7 +53,6 @@ public class ListUtilsTest {
         assertThat(Arrays.asList(0, 1, 2, 3), Is.is(input));
     }
 
-    //  forward tests for method          removeIf
     @Test
     public void whenRemoveIfGreaterThanZeroThen0() {
         List<Integer> input = new ArrayList<>(Arrays.asList(0, 1, 2, 3));
@@ -76,7 +74,6 @@ public class ListUtilsTest {
         assertThat(Arrays.asList(1, 3, 5), Is.is(input));
     }
 
-    //  forward tests for method          replaceIf
     @Test
     public void whenReplaceIfEven() {
         List<Integer> input = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5));
@@ -91,8 +88,6 @@ public class ListUtilsTest {
         assertThat(Arrays.asList(0, 11, 2, 11, 4, 11), Is.is(input));
     }
 
-
-    //  forward tests for method          removeAll
     @Test
     public void whenRemoveAllOneElement() {
         List<Integer> input = new ArrayList<>(Arrays.asList(0));
@@ -116,5 +111,4 @@ public class ListUtilsTest {
         ListUtils.removeAll(input, elements);
         assertThat(Arrays.asList(1, 2, 3), Is.is(input));
     }
-
 }

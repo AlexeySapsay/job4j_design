@@ -1,9 +1,8 @@
 package ru.job4j.collection.list;
 
-import static org.junit.Assert.*;
-
 import org.hamcrest.core.Is;
 import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Iterator;
 

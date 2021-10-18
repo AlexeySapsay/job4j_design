@@ -3,8 +3,7 @@ package ru.job4j.iterator;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
-
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class ArrayItTest {
@@ -12,9 +11,7 @@ public class ArrayItTest {
     public void whenMultiCallhasNextThenTrue() {
         ArrayIt it = new ArrayIt(new int[]{1, 2, 3});
         assertThat(it.hasNext(), is(true));
-
         assertThat(it.hasNext(), is(true));
-
     }
 
     @Test
