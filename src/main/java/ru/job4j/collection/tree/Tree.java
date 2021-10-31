@@ -40,6 +40,14 @@ public interface Tree<E> {
      */
     Optional<Node<E>> findBy(E value);
 
+    /**
+     * Проверка дерева на бинарность.
+     *
+     * @return true в случае если дерево бинарное,
+     * false в противном случае
+     */
+    boolean isBinary();
+
     class Node<E> {
         final E value;
         final List<Node<E>> children = new ArrayList<>();
