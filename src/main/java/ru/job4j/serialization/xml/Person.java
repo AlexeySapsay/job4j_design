@@ -57,11 +57,17 @@ public class Person {
 
         final Person person = new Person(false, 30, new Contact(
                 "11-111"), "Worker", "Married");
-        // Получаем контекст для доступа к АПИ
+        /**
+         * Получаем контекст для доступа к АПИ
+         */
         JAXBContext context = JAXBContext.newInstance(Person.class);
-        // Создаем сериализатор
+        /**
+         * Создаем сериализатор
+         */
         Marshaller marshaller = context.createMarshaller();
-        // Указываем, что нам нужно форматирование
+        /**
+         * Указываем, что нам нужно форматирование
+         */
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
         try (StringWriter writer = new StringWriter()) {

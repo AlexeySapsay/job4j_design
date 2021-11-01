@@ -85,7 +85,9 @@ public class Zip {
      *                               когда директория не существует
      */
     public static void validationArgsAndDir(String[] args, Path dirPath) throws IOException {
-        // Валидация агрументов. В args должно присутствовать 3 аргумента
+        /**
+         * Валидация агрументов. В args должно присутствовать 3 аргумента
+         */
         if (args.length != 3) {
             throw new IllegalArgumentException(" Arguments is not correct:"
                     + System.lineSeparator()
@@ -99,12 +101,15 @@ public class Zip {
                     + System.lineSeparator()
                     + "-o - output - во что мы архивируем.");
         }
-        // Валидация существования архивируемой дирректориии.
+        /**
+         *Валидация существования архивируемой дирректориии.
+         */
         if (!dirPath.toFile().isDirectory()) {
             throw new FileNotFoundException("The Director or file not exist");
         }
-
-        // Валидация корректности расположения аргументов
+        /**
+         * Валидация корректности расположения аргументов
+         */
         ArgsName argsName = new ArgsName();
         ArgsName argsMap = argsName.of(args);
         Set<String> argsKeysSet = argsMap.getKeys();

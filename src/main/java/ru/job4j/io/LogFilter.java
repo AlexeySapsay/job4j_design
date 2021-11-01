@@ -25,7 +25,9 @@ public class LogFilter {
     public static List<String> filter(String file) {
         List<String> buffer = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            // читаем и выводим на консоль. Аналогичная запись без применения stream API
+            /**
+             *  читаем и выводим на консоль. Аналогичная запись без применения stream API
+             */
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 List<String> lineSplitedToWords = Arrays.asList(line.split(" "));
                 String err404 = lineSplitedToWords.get(lineSplitedToWords.size() - 2);
@@ -49,8 +51,9 @@ public class LogFilter {
      */
     public static void save(List<String> log, String file) {
         List<String> logFilterResult = filter("log.txt");
-
-        // открываем поток для записи в файл
+        /**
+         *открываем поток для записи в файл
+         */
         try (PrintWriter out = new PrintWriter(
                 new BufferedOutputStream(new FileOutputStream(file)))) {
             for (String s : logFilterResult) {

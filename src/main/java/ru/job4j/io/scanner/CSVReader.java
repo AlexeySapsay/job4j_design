@@ -23,8 +23,11 @@ import ru.job4j.io.ArgsName;
  *
  * @since 13.09.2021
  */
-//public class CSVReader {
-//    public static void handle(ArgsName argsName) throws Exception {
-//        return;
-//    }
-//}
+
+public class CSVReader {
+/**
+ * public static void handle(ArgsName argsName) throws Exception {
+ *     return;
+ * }
+ */
+}

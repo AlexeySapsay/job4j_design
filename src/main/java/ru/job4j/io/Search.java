@@ -22,10 +22,15 @@ import java.util.function.Predicate;
 public class Search {
     public static void main(String[] args) throws IOException {
         Search searchInstance = new Search();
-        // валидация входных параметров
+        /**
+         * валидация входных параметров
+         */
+
         searchInstance.validation(args);
-        // Начальная папка передавалась через аргументы запуска,
-        // указываемыми параметроами в  терминале или командной строке.
+        /**
+         * Начальная папка передавалась через аргументы запуска,
+         * указываемыми параметроами в  терминале или командной строке.
+         */
         Path start = Paths.get(args[0]);
         String word = args[1];
 

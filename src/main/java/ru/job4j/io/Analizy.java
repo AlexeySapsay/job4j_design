@@ -46,25 +46,29 @@ public class Analizy {
      */
     @SuppressWarnings("checkstyle:SimplifyBooleanExpression")
     public void unavailable(String source, String target) {
-        // чтение файла с логами
+        /**
+         * чтение файла с логами
+         */
         List<String> buffer = new ArrayList<>();
         List<String> unavailableLogList = new ArrayList<>();
         List<String> unavailableLogListTimeStamp = new ArrayList<>();
-
-        //  читаем фильтруем условия отключения сервера и выводим на консоль
-        //  и пишем в буфер для дальнейшей фильтрации.
+        /**
+         * читаем фильтруем условия отключения сервера и выводим на консоль
+         * и пишем в буфер для дальнейшей фильтрации.
+         */
         try (BufferedReader in = new BufferedReader(new FileReader(source))) {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 List<String> lineSplited = Arrays.asList(line.split(" "));
                 buffer.add(lineSplited.get(0));
                 buffer.add(lineSplited.get(1));
-                //System.out.println(lineSplited.get(0) + " " + lineSplited.get(1));
             }
 
-            // Фильтр, извлекает значения из buffer и добавляем в unavailableLogList
-            // Сервер не работал, если status = 400 или 500.
-            // Диапазоном считается последовательность статусов 400 и 500
-            // формирование периодов недоступности сервера
+            /**
+             * Фильтр, извлекает значения из buffer и добавляем в unavailableLogList
+             * Сервер не работал, если status = 400 или 500.
+             * Диапазоном считается последовательность статусов 400 и 500
+             * формирование периодов недоступности сервера
+             */
             for (int i = 0; i < buffer.size(); i++) {
                 boolean flagNextAdd = false;
                 if (buffer.get(i).equals("400")
@@ -80,8 +84,10 @@ public class Analizy {
                 }
             }
 
-            // выделение начала и конца периода недоступности сервера
-            // удаление промежуточных значений между концом и началом периода
+            /**
+             * выделение начала и конца периода недоступности сервера
+             * удаление промежуточных значений между концом и началом периода
+             */
             unavailableLogListTimeStamp.add(unavailableLogList.get(0));
             for (int i = 0; i < unavailableLogList.size(); i++) {
                 if (unavailableLogList.get(i).equals("\n")) {
@@ -94,17 +100,15 @@ public class Analizy {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        // запись отфильтрованных логов в target файл
+        /**
+         *запись отфильтрованных логов в target файл
+         */
         try (PrintWriter out = new PrintWriter(
                 new BufferedOutputStream(new FileOutputStream(target)))) {
             for (int i = 0; i < unavailableLogListTimeStamp.size(); i += 2) {
                 out.append(unavailableLogListTimeStamp.get(i)).append(";");
                 out.append(unavailableLogListTimeStamp.get(i + 1)).append(";")
                         .append(System.lineSeparator());
-                //out.append(System.lineSeparator());
-                //out.append(System.lineSeparator());
-                //System.out.println();
             }
         } catch (
                 Exception e) {
@@ -112,11 +116,9 @@ public class Analizy {
         }
     }
 
-
     public static void main(String[] args) {
         Analizy analizy = new Analizy();
         analizy.unavailable("serverLogsUnavailable1.txt", "unavailable1.csv");
-
         System.out.println("Done!");
     }
 }

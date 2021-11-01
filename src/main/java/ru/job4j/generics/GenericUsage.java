@@ -8,7 +8,6 @@ public class GenericUsage {
         list.add("first");
         list.add("second");
         list.add("third");
-        //list.add(new Person("name", 21, new Date(913716000000L)));
         List<? super Integer> list1 = new ArrayList<>();
         new GenericUsage().addAll(list1);
     }

@@ -3,7 +3,7 @@ package ru.job4j.map;
 import java.util.*;
 
 /**
- * // https://www.geeksforgeeks.org/internal-working-of-hashmap-java/
+ * https:www.geeksforgeeks.org/internal-working-of-hashmap-java/
  * <p>
  * Класс SimpleMap для изучения работы с HashMap
  * и создание коллекции, аналога HashMap
@@ -17,33 +17,42 @@ import java.util.*;
  */
 public class SimpleMap<K, V> implements Map<K, V> {
     private static final float LOAD_FACTOR = 0.75f;
-    private int capacity = 8;           //начальное количество бакетов в коллекции при инициализации
-    private int modCount = 0;           //реальное количество модификаций коллекции
-    private int expectedModCount = 0;   //ожидаемое количество модификаций коллекции
-    private int size = 0;               //  показывает количество занятых бакетов
+    private int capacity = 8;
+    private int modCount = 0;
+    private int expectedModCount = 0;
+    private int size = 0;
 
-    private MapEntry<K, V>[] table = new MapEntry[capacity]; // внутренний массив SimpleMap
+    private MapEntry<K, V>[] table = new MapEntry[capacity];
 
+    /**
+     * проверка, на наличие свободного места для вставки элемента
+     * если места не достаточно, увеличиваем размер таблицы в 2 раза
+     *
+     * @param key   ключ объекта для вставки
+     * @param value значение объекта для вставки
+     * @return true если добавление успешно,
+     * false  в противном случае
+     */
     @Override
     public boolean put(K key, V value) {
-        // проверка, на наличие свободного места для вставки элемента
-        // если места не достаточно, увеличиваем размер таблицы в 2 раза
         if (capacity * LOAD_FACTOR <= size) {
             capacity = capacity * 2;
             expand();
         }
 
-        // вычисляем хэш элемента
-        // вычисляем хэш в таблице
-        // определяем индекс в таблице
+        /**
+         * вычисляем хэш элемента
+         * вычисляем хэш в таблице
+         * определяем индекс в таблице
+         */
         int indexInMapEntry = indexFor(key.hashCode());
 
-
-        //  проверяем свободна ли ячейка в table по адресу indexInTable
-        //  условие(если ячейка по индексу свободна){
-        //  добавляем элемент}
-        //  в противном случае возвращаем фолс.
-
+        /**
+         *  проверяем свободна ли ячейка в table по адресу indexInTable
+         *  условие(если ячейка по индексу свободна){
+         *  добавляем элемент}
+         *  в противном случае возвращаем фолс.
+         */
         if (table[indexInMapEntry] != null) {
             return false;
         } else {
@@ -62,7 +71,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
      * @return хэш значение
      */
     public int hash(int hashCode) {
-        //Здесь стоит сразу подчеркнуть. hash(null) всегда равно 0.
+        /**
+         * Здесь стоит сразу подчеркнуть. hash(null) всегда равно 0.
+         */
         return hashCode % (capacity - 1);
     }
 
@@ -84,10 +95,13 @@ public class SimpleMap<K, V> implements Map<K, V> {
      * рехеширование
      */
     private void expand() {
-        // создаем буферную талицу размером первая * 2
-        MapEntry<K, V>[] tableBuffer = new MapEntry[capacity]; // внутренний массив SimpleMap
-
-        // рехешируем table и сохраняем по новым индексам в tableBuffer
+        /**
+         * создаем буферную талицу размером первая * 2
+         */
+        MapEntry<K, V>[] tableBuffer = new MapEntry[capacity];
+        /**
+         *  рехешируем table и сохраняем по новым индексам в tableBuffer
+         */
         for (MapEntry mapEntry : table) {
             if (mapEntry == null) {
                 continue;
@@ -230,7 +244,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
         if (size != simpleMap.size) {
             return false;
         }
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+
+        /**
+         *  Probably incorrect - comparing Object[] arrays with Arrays.equals
+         */
         return Arrays.equals(table, simpleMap.table);
     }
 

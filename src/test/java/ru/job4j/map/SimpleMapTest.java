@@ -69,7 +69,6 @@ public class SimpleMapTest {
     public void whenGetNotNull() {
         SimpleMap<String, Integer> simpleMap = new SimpleMap<>();
         assertTrue(simpleMap.put("Alexandra", 10));
-        //assertTrue(simpleMap.get("Alexandra"), 10);
         assertEquals((simpleMap.get("Alexandra")), java.util.Optional.of(10).get());
     }
 

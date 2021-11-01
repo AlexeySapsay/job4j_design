@@ -9,10 +9,7 @@ public class RawTypes {
         List<String> list = new ArrayList<>();
 
         rawList = list;
-        //rawList.add(0, 1);
         rawList.add(3);
-        //rawList.add("string");
-        //System.out.println(rawList);
         String s = list.get(0);
         System.out.println(s);
     }

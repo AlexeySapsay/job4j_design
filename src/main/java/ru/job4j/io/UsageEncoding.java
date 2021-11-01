@@ -36,8 +36,6 @@ public class UsageEncoding {
     }
 
     public static void main(String[] args) {
-        //String path = "C:\\projects\\job4j_design\\data\\text.txt";
-        //String path = "./src/data/text.txt";
         String path = "C:\\projects\\job4j_design\\data\\text1.txt";
         UsageEncoding encoding = new UsageEncoding();
         List<String> strings = List.of(

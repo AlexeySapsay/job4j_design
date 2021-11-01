@@ -48,10 +48,6 @@ public class SearchFiles implements FileVisitor<Path> {
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
             throws IOException {
         Path pathToFile = Paths.get((file.getFileName().toString()));
-//        if (predicate.test(Paths.get((file.getFileName().toString())))) {
-//            pathList.add(Paths.get((file.getFileName().toString())));
-//            return CONTINUE;
-//        }
         if (predicate.test(pathToFile)) {
             pathList.add(pathToFile);
             return CONTINUE;

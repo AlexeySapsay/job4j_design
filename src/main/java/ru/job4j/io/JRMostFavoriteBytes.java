@@ -23,7 +23,6 @@ public class JRMostFavoriteBytes {
             }
         }
 
-        //int minCount = Integer.MAX_VALUE;
         int maxCount = Integer.MIN_VALUE;
         for (int byteCount : byteCountArray) {
             if (byteCount > 0 && byteCount > maxCount) {

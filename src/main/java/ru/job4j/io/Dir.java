@@ -21,24 +21,35 @@ import java.io.File;
 
 public class Dir {
     public static void main(String[] args) {
-        // валидация аргументов запуска
+        /**
+         *  валидация аргументов запуска
+         */
         if (args.length == 0) {
-            throw  new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
+            throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
         }
-        //зменим программу, чтобы начальная папка передавалась через аргументы запуска.
+        /**
+         *изменим программу, чтобы начальная папка передавалась через аргументы запуска.
+         */
         File file = new File(args[0]);
-        // ручками указываем начальную папку для поиска
-        //File file = new File(".");
-        //Проверяем, что файл существует.
+        /**
+         *ручками указываем начальную папку для поиска
+         *File file = new File(".");
+         *Проверяем, что файл существует.
+         */
+
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
         }
-        //Проверяет, что файл - это директория.
+        /**
+         * Проверяет, что файл - это директория.
+         */
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
         System.out.println(String.format("size : %s", file.getTotalSpace()));
-        //Получаем список файлов в этой директории.
+        /**
+         *Получаем список файлов в этой директории.
+         */
         for (File subfile : file.listFiles()) {
             System.out.println(subfile.getName() + " " + subfile.length() + " Bytes");
         }

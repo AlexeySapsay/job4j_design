@@ -30,12 +30,10 @@ public class ListUtilsTest {
         ListUtils.addBefore(input, 3, 2);
     }
 
-    // forward tests for method          addAfter
     @Test
     public void whenAddAfter() {
         List<Integer> input = new ArrayList<>(Arrays.asList(0, 1));
         ListUtils.addAfter(input, 1, 2);
-        //assertThat(Arrays.asList(0, 1), Is.is(input));
         assertThat(Arrays.asList(0, 1, 2), Is.is(input));
     }
 

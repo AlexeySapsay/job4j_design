@@ -1,5 +1,8 @@
 package ru.job4j.io;
-//https://job4j.ru/profile/exercise/45/task-view/307
+
+/**
+ *https://job4j.ru/profile/exercise/45/task-view/307
+ */
 
 import java.io.FileInputStream;
 

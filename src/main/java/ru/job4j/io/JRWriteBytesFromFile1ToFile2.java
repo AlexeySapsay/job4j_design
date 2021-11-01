@@ -17,18 +17,27 @@ import java.io.IOException;
 public class JRWriteBytesFromFile1ToFile2 {
     public static void main(String[] args) throws IOException {
         FileInputStream inputStream = new FileInputStream("c:/data.txt");
-        // Создаем поток-записи-байт-в-файл
+        /**
+         * Создаем поток-записи-байт-в-файл
+         */
         FileOutputStream outputStream = new FileOutputStream("c:/result.txt");
-        // Все что считали из файла result сохраняем в буфер
+        /**
+         *  Все что считали из файла result сохраняем в буфер
+         */
         byte[] buffer = new byte[inputStream.available()];
-        // читаем из буфера пока, пока буфер не закончится и записывает во
-        // второй файл
+        /**
+         * читаем из буфера пока, пока буфер не закончится и записывает во второй файл
+         */
         if (inputStream.available() > 0) {
-            //читаем весь файл одним куском
+            /**
+             * читаем весь файл одним куском
+             */
             int count = inputStream.read(buffer);
             outputStream.write(buffer, 0, count);
         }
-        // закрывает рабочие потоки
+        /**
+         * закрывает рабочие потоки
+         */
         inputStream.close();
         outputStream.close();
     }
