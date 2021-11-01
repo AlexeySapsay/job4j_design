@@ -12,7 +12,6 @@ import java.util.Optional;
  * @since 28.08.2021
  */
 
-
 public interface Tree<E> {
     /**
      * Метод add - Должен находить узел по значению parent

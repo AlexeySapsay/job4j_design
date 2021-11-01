@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 
 /**
  * https://job4j.ru/profile/exercise/43/task-view/301
+ *
  * В этом уроке мы познакомимся с алгоритмом обхода
  * дерева в ширину - breadth first search.
  *
