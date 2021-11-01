@@ -29,26 +29,25 @@ public class SimpleTree<E> implements Tree<E> {
         if (parentNode == null) {
             throw new NoSuchElementException();
         }
-        if (findBy(child).isPresent()) {
-            return false;
-        }
-        return parentNode.children.add(new Node<>(child));
+        return findBy(child).isPresent() ? false
+                : parentNode.children.add(new Node<>(child));
     }
 
+    /**
+     * Это класс использует алгоритм обхода в ширину.
+     * В этом задании мы не будем касаться устройства работы этого алгоритма.
+     * Вам нужно воспользоваться результатом его работы для реализации метода add.
+     * <p>
+     * поиск node E, по value
+     * Когда value отсутствует во всем дереве, то возвращается return = Optional.empty();
+     *
+     * @param value значение для поиска
+     * @return Optional Node E
+     */
     @Override
     public Optional<Node<E>> findBy(E value) {
-        Optional<Node<E>> rsl = Optional.empty();
-        Queue<Node<E>> data = new LinkedList<>();
-        data.offer(this.root);
-        while (!data.isEmpty()) {
-            Node<E> el = data.poll();
-            if (el.value.equals(value)) {
-                rsl = Optional.of(el);
-                break;
-            }
-            data.addAll(el.children);
-        }
-        return rsl;
+        return findByPredicate(valueE ->
+                valueE.value.equals(valueE));
     }
 
     /**
@@ -56,16 +55,18 @@ public class SimpleTree<E> implements Tree<E> {
      * в дереве. Если их > 2 - то дерево не бинарное
      *
      * @return Если их > 2 - то дерево не бинарное , вернуть false
+     * в противном случае, если =2, то дерево бинарное и вернуть true.
      */
     public boolean isBinary() {
-        return findByPredicate((value)
-                -> value.children.size() > 2).isEmpty();
+        return findByPredicate(value ->
+                value.children.size() > 2).isEmpty();
     }
 
     /**
      * Обратите внимание, что методы isBinary() и findBy() идентичны.
      * Ваша задача отрефакторить код, создав
-     * вспомогательный метод. Это метод уже использовать в методах isBinary() и findBy()
+     * вспомогательный метод. Это метод уже использовать в методах
+     * isBinary() и findBy()
      *
      * @param condition условие для чего?
      * @return Optional<Node> or null если значение не найденно
