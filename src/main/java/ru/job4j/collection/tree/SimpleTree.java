@@ -16,7 +16,6 @@ import java.util.function.Predicate;
  * @version 1.0
  * @since 27.10.2021
  */
-
 public class SimpleTree<E> implements Tree<E> {
     private final Node<E> root;
 
