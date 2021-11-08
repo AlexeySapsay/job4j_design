@@ -1,6 +1,7 @@
 package ru.job4j.question;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -106,12 +107,62 @@ public class Analize {
 //        }
 
 
+//        for (User user : previous) {
+//            if (!current.contains(user)
+//                    && !hashMapPrev.containsKey(user.getId())
+//                    && !hashMapPrev.containsValue(user.getName())) {
+//                deleted += 1;
+//            }
+//        }
+
+//        for (User user : previous) {
+//            if (!current.contains(user)
+//                    && (hashMapPrev.containsKey(user.getId())
+//                    && (!hashMapPrev.containsValue(user.getName()))
+//            )) {
+//                deleted += 1;
+//            }
+//        }
+
+//        for (User user : previous) {
+//            if (!current.contains(user)
+//                    && (hashMapPrev.containsKey(user.getId())
+//                    && (!hashMapPrev.containsValue(user.getName()))
+//            )) {
+//                deleted += 1;
+//            }
+//        }
+
+//        Set<User> differenceSet = new HashSet<>(previous);
+//        differenceSet.removeAll(current);
+
+//        for (User user : differenceSet) {
+//            if (!current.contains(user)
+//                    && (hashMapPrev.containsKey(user.getId())
+//                    //&& (!hashMapPrev.containsValue(user.getName()))
+//                    //&& (!hashMapPrev.get(user.getId())
+//                    //== (user.getName())))) {
+//                deleted += 1;
+//            }
+//        }
+
+//        for (User user : differenceSet) {
+//            if (!current.contains(user)
+//                    && hashMapPrev.containsKey(user.getId())) {
+//                deleted += 1;
+//            }
+//        }
+
         for (User user : previous) {
             if (!current.contains(user)
-                    && (current.contains(user.getId()))) {
+                    && hashMapPrev.containsKey(user.getId())
+                    //&& user.getName() == hashMapPrev.get(user.getId())) {
+                    || user.getName() != hashMapPrev.get(user.getId())) {
                 deleted += 1;
             }
         }
+
+
         return new Info(added, changed, deleted);
     }
 }
