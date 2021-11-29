@@ -48,10 +48,7 @@ public class CinemaTest {
      *         ticketList.add(ticket2);
      *         cinema.findTiket(ticket -> true);
      *
-     *         //assertThat(ticket1, is(Arrays.asList(ticketList)));
      *         assertTrue(ticket1.equals(ticket2));
-     *
-     *         //assertEquals(ticket1, ticket2);
      *     }
      */
 
