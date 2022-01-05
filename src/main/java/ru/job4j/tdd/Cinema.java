@@ -19,7 +19,7 @@ import java.util.function.Predicate;
 public interface Cinema {
     List<Session> find(Predicate<Session> filter);
 
-    List<Ticket> findTiket(Predicate<Ticket> filter);
+    List<Ticket> findTicket(Predicate<Ticket> filter);
 
     Ticket buy(Account account, int row, int column, Calendar date);
 

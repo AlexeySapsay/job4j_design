@@ -7,8 +7,8 @@ import java.util.function.Predicate;
 
 
 public class Cinema3D implements Cinema {
-    public static final int SIZEOFCINEMA = 500;
-    public static int emptyPlace = 500;
+    public static final int SIZEOFCINEMA = 100;
+    public static int emptyPlace = 100;
 
     public List<Account> accountList = new ArrayList<>();
 
@@ -19,7 +19,7 @@ public class Cinema3D implements Cinema {
     }
 
     @Override
-    public List<Ticket> findTiket(Predicate<Ticket> filter) {
+    public List<Ticket> findTicket(Predicate<Ticket> filter) {
         return null;
     }
 
