@@ -5,30 +5,27 @@ import org.junit.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+//import static org.junit.Assert.*;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
 
 public class GeneratorTest {
     @Ignore
-    @Test(expected = IllegalArgumentException.class)
-    public void testWhenKeyInTemplateNotInMapThenThrowException() {
-        String template = new String();
-
-        List<String> words = new ArrayList<>();
-        words.addAll(Arrays.asList(template.split(" ")));
-        words.removeIf(word -> (!word.contains("$")));
-        ((ArrayList<String>) words).trimToSize();
-
-        /**
-         *и дальше очищаем от {}, знаков препинания и получаем
-         * коллекцию содержащию чистые name, subject
-         */
-
+    @Test
+    public void testWhenKeyInTemplateNotInMap() {
+        String template = "I am a ${name}, Who are ${subject}? ";
         Map<String, String> map = new HashMap<>();
-        for (String word : words) {
-            if (!map.containsKey(word) && !map.containsValue(word)) {
-                throw new IllegalArgumentException("That name not contains in map");
-            }
-        }
+
+        map.put("name", "Petr Arsentev");
+        map.put("subject", "you");
+
+        String rsl = "I am a Petr Arsentev, Who are you? ";
+        GeneratorImplementation gI = new
+                GeneratorImplementation();
+        assertThat(rsl, is(gI.produce(template, map)));
     }
+
 
 }
