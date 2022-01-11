@@ -61,20 +61,46 @@ public class CinemaTest {
 
     @Ignore
     @Test(expected = IllegalArgumentException.class)
-    public void ticketToNotEmptyPlace() {
+    public void ticketToIncorrectPlaceWithMinusRowAndColumnThenException() {
         Account account1 = new AccountCinema();
 
+        List<Ticket> ticketList = new ArrayList<>();
+        Cinema cinema = new Cinema3D();
+        cinema.add(new Session3D());
+        List<Session> sessions = cinema.find(session -> true);
+
+        Calendar date = Calendar.getInstance();
+        date.set(2023, 10, 10, 23, 00);
+
+        Ticket ticket = cinema.buy(account1, -1, -1, date);
+    }
+
+    @Ignore
+    @Test(expected = IllegalArgumentException.class)
+    public void ticketToIncorrectPlaceWithSoBigNumberThenException() {
+        Account account1 = new AccountCinema();
+
+        List<Ticket> ticketList = new ArrayList<>();
+        Cinema cinema = new Cinema3D();
+        cinema.add(new Session3D());
+        List<Session> sessions = cinema.find(session -> true);
+
+        Calendar date = Calendar.getInstance();
+        date.set(2023, 10, 10, 23, 00);
+
+        Ticket ticket = cinema.buy(account1, 1000, 1000, date);
+    }
+
+    @Ignore
+    @Test(expected = IllegalArgumentException.class)
+    public void ticketToNotEmptyPlace() {
+        Account account1 = new AccountCinema();
         List<Ticket> ticketList = new ArrayList<>();
         Cinema cinema = new Cinema3D();
         Calendar date = Calendar.getInstance();
 
         date.set(2020, 10, 10, 23, 00);
         Ticket ticket1 = cinema.buy(account1, 1, 1, date);
-        Cinema3D.emptyPlace -= 1;
-
-        if (Cinema3D.emptyPlace <= 0) {
-            throw new IllegalArgumentException("Not empty place in the cinema");
-        }
     }
 
     @Ignore
@@ -88,10 +114,8 @@ public class CinemaTest {
         List<Session> sessions = cinema.find(session -> true);
 
         Calendar date = Calendar.getInstance();
-        date.set(2020, 10, 10, 23, 00);
+        date.set(2023, 10, 10, 23, 00);
 
-        if (!sessions.contains(date)) {
-            throw new IllegalArgumentException("Not Session in the cinema");
-        }
+        Ticket ticket = cinema.buy(account1, 1, 1, date);
     }
 }
