@@ -33,16 +33,10 @@ public class GeneratorTest {
         map.put("subject", "you");
         map.put("person", "me");
 
-        int counter = 0;
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            if (!map.containsValue(entry)
-                    && !map.containsKey(entry)) {
-                counter++;
-            }
-        }
-        if (counter != 0) {
-            throw new IllegalArgumentException();
-        }
+        GeneratorImplementation gI =
+                new GeneratorImplementation();
+
+        String rsl = gI.produce(template, map);
     }
 
 
@@ -51,23 +45,14 @@ public class GeneratorTest {
     public void testWhenNotValidTemplate2() {
         GeneratorImplementation gI = new
                 GeneratorImplementation();
+
         String template = "I am a ${name}";
-        long countChar = template.chars().filter(ch -> ch == '$').count();
 
         Map<String, String> map = new HashMap<>();
         map.put("name", "Petr Arsentev");
         map.put("subject", "you");
         map.put("person", "me");
 
-        int counter = 0;
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            if (!map.containsValue(entry)
-                    && !map.containsKey(entry)) {
-                counter++;
-            }
-        }
-        if (counter != 0 || (countChar != map.size())) {
-            throw new IllegalArgumentException();
-        }
+        String rsl = gI.produce(template, map);
     }
 }
