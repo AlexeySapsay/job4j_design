@@ -47,16 +47,8 @@ public class CinemaTest {
 
         date.set(2020, 10, 10, 23, 00);
         Ticket ticket1 = cinema.buy(account1, 1, 1, date);
-        Ticket ticket2 = cinema.buy(account2, 1, 1, date);
-        ticketList.add(ticket1);
-        ticketList.add(ticket2);
-        cinema.findTicket(ticket -> true);
+        Ticket ticket2 = cinema.buy(account1, 1, 1, date);
 
-        if (ticket1.equals(ticket2)) {
-            throw new IllegalArgumentException();
-        }
-
-        assertTrue(ticket1.equals(ticket2));
     }
 
     @Ignore
