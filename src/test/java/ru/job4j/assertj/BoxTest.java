@@ -22,7 +22,7 @@ class BoxTest {
     }
 
     @Test
-    void IsGetAgeThenThen173() {
+    void isGetAgeThenThen173() {
         Box box = new Box(4, 10);
         double result = box.getArea();
         assertThat(result).isNotZero()
@@ -33,7 +33,7 @@ class BoxTest {
     }
 
     @Test
-    void IsGetAgeThenThenReturn173() {
+    void isGetAgeThenThenReturn173() {
         Box box = new Box(4, 10);
         double result = box.getArea();
         assertThat(result).isEqualTo(173.0d, withPrecision(0.5d))
@@ -44,21 +44,21 @@ class BoxTest {
     }
 
     @Test
-    void IsGetNumberOfVerticesThenInt() {
+    void isGetNumberOfVerticesThenInt() {
         Box box = new Box(4, 10);
         int result = box.getNumberOfVertices();
         assertThat(result).isNotZero();
     }
 
     @Test
-    void IsExistThenReturnTrue() {
+    void isExistThenReturnTrue() {
         Box box = new Box(4, 10);
         boolean result = box.isExist();
         assertThat(result).isTrue();
     }
 
     @Test
-    void IsNotExistThenReturnFalse() {
+    void isNotExistThenReturnFalse() {
         Box box = new Box(0, 0);
         boolean result = box.isExist();
         assertThat(result).isFalse();
