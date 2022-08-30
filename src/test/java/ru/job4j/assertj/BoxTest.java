@@ -14,7 +14,7 @@ class BoxTest {
     }
 
     @Test
-    void IsThisThenTetrahedron() {
+    void isThisThenTetrahedron() {
         Box box = new Box(4, 10);
         String result = box.whatsThis();
         assertThat(result).isNotNull()
