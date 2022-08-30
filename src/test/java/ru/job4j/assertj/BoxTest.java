@@ -14,7 +14,7 @@ class BoxTest {
     }
 
     @Test
-    void IsThisThenReturnTetrahedron() {
+    void IsThisThenTetrahedron() {
         Box box = new Box(4, 10);
         String result = box.whatsThis();
         assertThat(result).isNotNull()
@@ -22,7 +22,7 @@ class BoxTest {
     }
 
     @Test
-    void IsGetAgeThenThenReturn173_20508075688772() {
+    void IsGetAgeThenThen173() {
         Box box = new Box(4, 10);
         double result = box.getArea();
         assertThat(result).isNotZero()
@@ -44,7 +44,7 @@ class BoxTest {
     }
 
     @Test
-    void IsGetNumberOfVerticesThenReturnInt() {
+    void IsGetNumberOfVerticesThenInt() {
         Box box = new Box(4, 10);
         int result = box.getNumberOfVertices();
         assertThat(result).isNotZero();
