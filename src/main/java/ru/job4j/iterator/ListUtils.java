@@ -5,16 +5,6 @@ import java.util.ListIterator;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/**
- * Модель ListIterator, для работы с коллекциями имплеминтирующие
- * интерфейс List
- * Задача: написать недастающие методы и тесты для них
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 0.1
- * @since 22.08.2021
- */
-
 public class ListUtils {
     /**
      * Метод который будет вставлять значение перед индексом

@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.function.Predicate;
 
-
 public class Cinema3D implements Cinema {
     public static final int SIZEOFCINEMA = 100;
     public static int emptyPlace = 100;
