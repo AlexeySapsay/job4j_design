@@ -4,16 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * https://job4j.ru/profile/exercise/4/task-view/279
- * <p>
- * Изучение работы с ArrayList and LinkedList
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 0.1
- * @since 16.08.2021
- */
-
 public class ListUsage {
     public static void main(String[] args) {
         List<String> rsl = new ArrayList<>();
