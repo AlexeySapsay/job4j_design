@@ -9,17 +9,6 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Arrays;
 
-/**
- * https://job4j.ru/profile/exercise/174/task-view/328
- * XML — расширяемый язык разметки. Данный язык очень похож на HTML, только в отличии от него является расширяемым, что
- * <p>
- * значит, мы можем писать свои теги, а не использовать зарезервированные.
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 16.09.2021
- */
-
 @XmlRootElement(name = "People")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class People {

@@ -1,16 +1,4 @@
 package ru.job4j.serialization.xml;
-/**
- * https://job4j.ru/profile/exercise/174/task-view/328
- * POJO (Plain Old Java Object) — «старый добрый Java-объект»,
- * простой Java-объект. Термин впервые начал употребляться Мартином
- * Фаулером и его коллегами как результат поиска способов упрощения
- * разработки. Нет формального определения, какие объекты являются POJO,
- * обычно руководствуются следующими соглашениями для класса:
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 16.09.2021
- */
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

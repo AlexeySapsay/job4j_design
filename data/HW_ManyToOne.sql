@@ -1,5 +1,3 @@
---https://job4j.ru/profile/exercise/51/task-view/336
--- Many-to-one
 
 create table adress(
     id serial primary key,

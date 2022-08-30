@@ -5,18 +5,6 @@ import com.google.gson.GsonBuilder;
 
 import java.util.Arrays;
 
-/**
- * https://job4j.ru/profile/exercise/174/task-view/327
- * JSON сериализация и десериализация
- * Придумайте Java объект, объект должен иметь поля булево,
- * какой-нибудь числовой тип, строковый тип,
- * вложенный объект и массив.
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 15.09.2021
- */
-
 public class JavaObject {
     private boolean gender;
     private long salary;

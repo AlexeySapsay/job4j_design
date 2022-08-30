@@ -1,17 +1,6 @@
 package ru.job4j.serialization.json;
 
 import org.json.JSONObject;
-
-/**
- * https://job4j.ru/profile/exercise/174/task-view/330
- * JSON сериализация и десериализация
- * Преобразование JSON в POJO. JsonObject
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 22.09.2021
- */
-
 public class B {
     private A a;
 
