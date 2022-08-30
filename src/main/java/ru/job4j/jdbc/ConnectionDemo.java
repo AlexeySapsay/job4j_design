@@ -6,15 +6,6 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 
-/**
- * https://job4j.ru/profile/exercise/55/task-view/344
- * Изучение работы с JDBC. Подключение JDBC и чтение файла app.properties
- * в качестве настроечного файла.
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 27.09.2021
- */
 public class ConnectionDemo {
     public static void main(String[] args) {
         Config config = new Config("./data/app.properties");

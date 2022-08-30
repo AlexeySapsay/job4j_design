@@ -9,10 +9,6 @@ import static org.hamcrest.Matchers.is;
 
 import java.io.*;
 
-/**
- * Тестирование проекта, с использованием временной папки
- * https://job4j.ru/profile/exercise/45/task-view/312/solutionId/198299
- */
 public class AnalizyTest {
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();

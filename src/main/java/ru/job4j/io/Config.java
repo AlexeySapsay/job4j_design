@@ -1,22 +1,10 @@
 package ru.job4j.io;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-
-/**
- * Изучение работы с потоками ввода- вывода
- * Чтение файла конфигурации
- * https://job4j.ru/profile/exercise/45/task-view/310
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 31.08.2021
- */
-
 
 public class Config {
     private final String path;

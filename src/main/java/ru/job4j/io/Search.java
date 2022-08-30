@@ -6,31 +6,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Predicate;
-
-/**
- * https://job4j.ru/profile/exercise/45/task-view/314
- * https://job4j.ru/profile/exercise/45/task-view/316
- * <p>
- * Разработайте программу Search, которая будет искать
- * файлы только по определенному предикату.
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 04.09.2021
- */
-
 public class Search {
     public static void main(String[] args) throws IOException {
         Search searchInstance = new Search();
-        /**
-         * валидация входных параметров
-         */
 
         searchInstance.validation(args);
-        /**
-         * Начальная папка передавалась через аргументы запуска,
-         * указываемыми параметроами в  терминале или командной строке.
-         */
+
         Path start = Paths.get(args[0]);
         String word = args[1];
 

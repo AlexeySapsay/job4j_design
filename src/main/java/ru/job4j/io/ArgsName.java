@@ -3,18 +3,6 @@ package ru.job4j.io;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-/**
- * https://job4j.ru/profile/exercise/45/task-view/317
- * <p>
- * написать программу, которая принимает
- * массив параметров и разбивает их на пары: ключ, значение.
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 08.09.2021
- */
-
 public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 

@@ -5,15 +5,6 @@ import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * https://job4j.ru/profile/exercise/45/task-view/319
- * Изучение работы с потоками ввода- вывода.
- * Кодировка UTF-8
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 10.09.2021
- */
 public class UsageEncoding {
     public String readFile(String path) {
         StringBuilder builder = new StringBuilder();

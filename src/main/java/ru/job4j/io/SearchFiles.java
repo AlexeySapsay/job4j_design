@@ -12,16 +12,6 @@ import java.util.function.Predicate;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
 
-/**
- * https://job4j.ru/profile/exercise/45/task-view/314
- * <p>
- * Разработайте программу Search, которая будет искать
- * файлы только по определенному предикату.
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 04.09.2021
- */
 public class SearchFiles implements FileVisitor<Path> {
     Predicate<Path> predicate;
     List<Path> pathList = new ArrayList<>();

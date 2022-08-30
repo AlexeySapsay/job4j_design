@@ -1,20 +1,7 @@
 package ru.job4j.io;
 
-/**
- *https://job4j.ru/profile/exercise/45/task-view/307
- */
-
 import java.io.FileInputStream;
 
-/**
- * Программа выполняет чтение данных из файла
- * проверяет четное число или нет и выводит
- * результат на консоль
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 29.08.2021
- */
 public class EvenNumberFile {
     public static void main(String[] args) {
         try (FileInputStream in = new FileInputStream("even.txt")) {

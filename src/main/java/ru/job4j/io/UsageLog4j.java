@@ -3,20 +3,6 @@ package ru.job4j.io;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * https://job4j.ru/profile/exercise/47/task-view/324
- * Оператор плюс (+) для String создает в памяти новую строку. Это плохо, потому что в памяти создаются копии строк.
- * <p>
- * Это приводит к нерациональному использованию памяти.
- * <p>
- * Чтобы избежать сложение строк в slf4j используется шаблон для подстановки переменных.
- * <p>
- * Запишем в лог переменные разных типов.
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 14.09.2021
- */
 public class UsageLog4j {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
@@ -39,8 +25,5 @@ public class UsageLog4j {
                 expectationSalaryUSDPerNanoSec);
         LOG.debug("current salary to investition : {}, goal: {}", investPercent, expectationInvestPercent);
         LOG.debug(" sport : {}, gender : {}", sport, gender);
-
-
-
     }
 }

@@ -7,13 +7,6 @@ import java.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * https://job4j.ru/profile/exercise/46/task-view/320
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 14.09.2021
- */
 public class EchoServer {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 

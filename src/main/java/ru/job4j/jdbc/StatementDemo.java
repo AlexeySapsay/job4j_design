@@ -5,16 +5,6 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.StringJoiner;
 
-/**
- * https://job4j.ru/profile/exercise/55/task-view/345
- * Изучение работы с JDBC. Подключение JDBC и чтение файла app.properties
- * в качестве настроечного файла. Работа с DDL-
- * создание, обновление, удаление таблиц/ баз данных.
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 28.09.2021
- */
 public class StatementDemo {
     /**
      * Метод устававливает соединение с базой данныз

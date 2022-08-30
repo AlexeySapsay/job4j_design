@@ -5,17 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Изучение работы с потоками ввода- вывода
- * Чтение файла логов и определения периодов недоступности
- * сервера
- * https://job4j.ru/profile/exercise/45/task-view/311
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 01.09.2021
- */
-
 public class Analizy {
     /**
      * Метод определяет перид недоступности сервера.

@@ -6,16 +6,6 @@ import java.util.Optional;
 import java.util.Queue;
 import java.util.function.Predicate;
 
-/**
- * https://job4j.ru/profile/exercise/43/task-view/301
- *
- * В этом уроке мы познакомимся с алгоритмом обхода
- * дерева в ширину - breadth first search.
- *
- * @author AlexSapsay (sapsayalexey@gmail.com)
- * @version 1.0
- * @since 27.10.2021
- */
 public class SimpleTree<E> implements Tree<E> {
     private final Node<E> root;
 
