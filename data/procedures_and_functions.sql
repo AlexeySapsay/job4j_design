@@ -126,16 +126,20 @@ call delete_data_procedure('product_2');
 
 -- создаю хранимую функцию для удаления данных
 create or replace function func_delete_data(c_name varchar)
-returns integer
+returns void
 language 'plpgsql'
 as
 $$
 declare results integer;
     begin
         delete from products where name = c_name;
-        return results;
+        return ;
     end;
 $$;
+
+-- в случае обновления функции ее нужно удалить, а потом обновить
+-- проинициклизировать запуском плай
+DROP FUNCTION func_delete_data(c_name varchar);
 
 select func_delete_data('product_1');
 select * from products;
