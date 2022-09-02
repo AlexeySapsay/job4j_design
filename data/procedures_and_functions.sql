@@ -130,10 +130,8 @@ returns void
 language 'plpgsql'
 as
 $$
-declare results integer;
     begin
         delete from products where name = c_name;
-        return ;
     end;
 $$;
 
