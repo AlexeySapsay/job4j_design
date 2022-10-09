@@ -50,10 +50,17 @@ public class CSVReader {
     }
 
     private static void saveCSV(List<String> rsl, ArgsName argsName) {
-        try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(argsName.get("out"))))) {
-            rsl.forEach(out::println);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        if (argsName.get("out").equals("stdout")) {
+            for (String str : rsl) {
+                System.out.println(str);
+            }
+        } else {
+            try (PrintWriter out = new PrintWriter(
+                    new BufferedOutputStream(new FileOutputStream(argsName.get("out"))))) {
+                rsl.forEach(out::println);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 
