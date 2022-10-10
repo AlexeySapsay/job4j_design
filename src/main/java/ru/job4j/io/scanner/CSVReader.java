@@ -50,7 +50,7 @@ public class CSVReader {
     }
 
     private static void saveCSV(List<String> rsl, ArgsName argsName) {
-        if (argsName.get("out").equals("stdout")) {
+        if ("stdout".equals(argsName.get("out"))) {
             for (String str : rsl) {
                 System.out.println(str);
             }
