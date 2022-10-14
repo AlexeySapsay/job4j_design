@@ -31,6 +31,8 @@ public class WiHuTePrTime {
     }
 
     public static void saveToDB() {
-        //save measure object in DB
+        /**
+         * save measure object in DB
+         */
     }
 }
