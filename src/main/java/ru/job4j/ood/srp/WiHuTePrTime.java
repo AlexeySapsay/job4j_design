@@ -2,7 +2,7 @@ package ru.job4j.ood.srp;
 
 import java.sql.Timestamp;
 
-public class WindHumidityTemperaturePressureTime {
+public class WiHuTePrTime {
     private float windSpeed = 0;
     private float humidity = 0;
     private float temperatureCelsius = 0;
@@ -20,10 +20,10 @@ public class WindHumidityTemperaturePressureTime {
         return temperatureSensor.measureTemperature();
     }
 
-    public WindHumidityTemperaturePressureTime(float windSpeed,
-                                               float humidity,
-                                               float temperatureCelsius,
-                                               Timestamp timestamp) {
+    public WiHuTePrTime(float windSpeed,
+                        float humidity,
+                        float temperatureCelsius,
+                        Timestamp timestamp) {
         this.windSpeed = windSpeed;
         this.humidity = humidity;
         this.temperatureCelsius = temperatureCelsius;
