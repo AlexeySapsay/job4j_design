@@ -1,4 +1,4 @@
-package ru.job4j.ood.srp;
+package ru.job4j.ood.srp.metheostation;
 
 import ru.job4j.io.Matrix;
 
