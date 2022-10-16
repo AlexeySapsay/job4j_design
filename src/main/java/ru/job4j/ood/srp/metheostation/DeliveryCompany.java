@@ -1,5 +1,12 @@
 package ru.job4j.ood.srp.metheostation;
 
+/**
+ * OCP практика на примере логистической компании
+ *
+ * @author Alexey Sapsay
+ * @version 1.0
+ * @since 16.10.2022
+ */
 public class DeliveryCompany {
     /**
      * получение товара для доставки

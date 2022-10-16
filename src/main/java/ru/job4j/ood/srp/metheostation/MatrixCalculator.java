@@ -4,6 +4,13 @@ import ru.job4j.io.Matrix;
 
 import java.io.File;
 
+/**
+ * OCP практика на примере калькулятора матриц
+ *
+ * @author Alexey Sapsay
+ * @version 1.0
+ * @since 16.10.2022
+ */
 public class MatrixCalculator {
     /**
      * реализация чтения массива из файла

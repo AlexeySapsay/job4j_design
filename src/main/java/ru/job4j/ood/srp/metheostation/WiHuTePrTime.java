@@ -2,6 +2,13 @@ package ru.job4j.ood.srp.metheostation;
 
 import java.sql.Timestamp;
 
+/**
+ * OCP практика на примере калькулятора матриц
+ *
+ * @author Alexey Sapsay
+ * @version 1.0
+ * @since 16.10.2022
+ */
 public class WiHuTePrTime {
     private float windSpeed = 0;
     private float humidity = 0;
