@@ -9,6 +9,7 @@ public class Constants {
             new SimpleDateFormat("dd:MM:yyyy HH:mm");
 
     public static final double DOLLARCURENCY = 66.0;
+
     public static final double TAX = 0.13;
 
 }
