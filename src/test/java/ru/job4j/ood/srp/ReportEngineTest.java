@@ -42,8 +42,8 @@ public class ReportEngineTest {
                 .append(worker.getName()).append(";")
                 .append(DATE_FORMAT.format(worker.getHired().getTime())).append(";")
                 .append(DATE_FORMAT.format(worker.getFired().getTime())).append(";")
-                .append((worker.getSalary() * DOLLARCURENCY -
-                        (worker.getSalary() * DOLLARCURENCY * TAX)))
+                .append((worker.getSalary() * DOLLARCURENCY
+                        - (worker.getSalary() * DOLLARCURENCY * TAX)))
                 .append(";")
                 .append(SYSLIN);
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
