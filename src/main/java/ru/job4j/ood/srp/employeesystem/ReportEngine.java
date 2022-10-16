@@ -1,7 +1,9 @@
 package ru.job4j.ood.srp.employeesystem;
 
-import java.text.SimpleDateFormat;
 import java.util.function.Predicate;
+
+import static ru.job4j.ood.srp.employeesystem.Constants.DATE_FORMAT;
+import static ru.job4j.ood.srp.employeesystem.Constants.SYSLIN;
 
 /**
  * Класс формирующий отчеты
@@ -11,8 +13,6 @@ import java.util.function.Predicate;
  * @since 15.10.2022
  */
 public class ReportEngine implements Report {
-
-    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd:MM:yyyy HH:mm");
 
     private Store store;
 
@@ -24,13 +24,13 @@ public class ReportEngine implements Report {
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
         text.append("Name; Hired; Fired; Salary;")
-                .append(System.lineSeparator());
+                .append(SYSLIN);
         for (Employee employee : store.findBy(filter)) {
             text.append(employee.getName()).append(";")
                     .append(DATE_FORMAT.format(employee.getHired().getTime())).append(";")
                     .append(DATE_FORMAT.format(employee.getFired().getTime())).append(";")
                     .append(employee.getSalary()).append(";")
-                    .append(System.lineSeparator());
+                    .append(SYSLIN);
         }
         return text.toString();
     }

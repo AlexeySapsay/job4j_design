@@ -3,6 +3,8 @@ package ru.job4j.ood.srp.employeesystem;
 import java.text.SimpleDateFormat;
 import java.util.function.Predicate;
 
+import static ru.job4j.ood.srp.employeesystem.Constants.SYSLIN;
+
 /**
  * Класс формирующий отчеты для ИТ отдела
  *
@@ -30,13 +32,13 @@ public class ITReport implements Report {
                 .append("</head>")
                 .append("<body>")
                 .append("Name; Hired; Fired; Salary;")
-                .append(System.lineSeparator());
+                .append(SYSLIN);
         for (Employee employee : store.findBy(filter)) {
             text.append(employee.getName()).append(";")
                     .append(DATE_FORMAT.format(employee.getHired().getTime())).append(";")
                     .append(DATE_FORMAT.format(employee.getFired().getTime())).append(";")
                     .append(employee.getSalary()).append(";")
-                    .append(System.lineSeparator());
+                    .append(SYSLIN);
         }
         text.append("</body>")
                 .append("</html>");

@@ -3,12 +3,11 @@ package ru.job4j.ood.srp;
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.srp.employeesystem.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 
 import static org.assertj.core.api.Assertions.*;
-import static ru.job4j.ood.srp.employeesystem.AccountReport.salaryWithoutTaxCalc;
-import static ru.job4j.ood.srp.employeesystem.ReportEngine.DATE_FORMAT;
-
+import static ru.job4j.ood.srp.employeesystem.Constants.*;
 
 public class ReportEngineTest {
 
@@ -21,17 +20,17 @@ public class ReportEngineTest {
         Report engine = new ReportEngine(store);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
-                .append(System.lineSeparator())
+                .append(SYSLIN)
                 .append(worker.getName()).append(";")
                 .append(DATE_FORMAT.format(worker.getHired().getTime())).append(";")
                 .append(DATE_FORMAT.format(worker.getFired().getTime())).append(";")
                 .append(worker.getSalary()).append(";")
-                .append(System.lineSeparator());
+                .append(SYSLIN);
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }
 
     @Test
-    public void whenAccountReport() {
+    public void whenAccountReport() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -39,12 +38,14 @@ public class ReportEngineTest {
         Report engine = new AccountReport(store);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
-                .append(System.lineSeparator())
+                .append(SYSLIN)
                 .append(worker.getName()).append(";")
                 .append(DATE_FORMAT.format(worker.getHired().getTime())).append(";")
                 .append(DATE_FORMAT.format(worker.getFired().getTime())).append(";")
-                .append(salaryWithoutTaxCalc(worker)).append(";")
-                .append(System.lineSeparator());
+                .append((worker.getSalary() * DOLLARCURENCY -
+                        (worker.getSalary() * DOLLARCURENCY * TAX)))
+                .append(";")
+                .append(SYSLIN);
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }
 
@@ -64,12 +65,12 @@ public class ReportEngineTest {
                 .append("</head>")
                 .append("<body>")
                 .append("Name; Hired; Fired; Salary;")
-                .append(System.lineSeparator())
+                .append(SYSLIN)
                 .append(worker.getName()).append(";")
                 .append(DATE_FORMAT.format(worker.getHired().getTime())).append(";")
                 .append(DATE_FORMAT.format(worker.getFired().getTime())).append(";")
                 .append(worker.getSalary()).append(";")
-                .append(System.lineSeparator())
+                .append(SYSLIN)
                 .append("</body>")
                 .append("</html>");
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
@@ -86,13 +87,13 @@ public class ReportEngineTest {
         Report engine = new HRReport(store);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Salary;")
-                .append(System.lineSeparator())
+                .append(SYSLIN)
                 .append(worker2.getName()).append(";")
                 .append(worker2.getSalary()).append(";")
-                .append(System.lineSeparator())
+                .append(SYSLIN)
                 .append(worker1.getName()).append(";")
                 .append(worker1.getSalary()).append(";")
-                .append(System.lineSeparator());
+                .append(SYSLIN);
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }
 }

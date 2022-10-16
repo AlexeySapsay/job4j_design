@@ -1,17 +1,13 @@
 package ru.job4j.ood.srp.employeesystem;
 
-import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static ru.job4j.ood.srp.employeesystem.ReportEngine.DATE_FORMAT;
-
+import static ru.job4j.ood.srp.employeesystem.Constants.SYSLIN;
 
 public class HRReport implements Report {
 
-    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd:MM:yyyy HH:mm");
     private Store store;
 
     public HRReport(Store store) {
@@ -22,17 +18,17 @@ public class HRReport implements Report {
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
         text.append("Name; Salary;")
-                .append(System.lineSeparator());
+                .append(SYSLIN);
 
         for (Employee employee : sortedSalary(store.findBy(filter))) {
             text.append(employee.getName()).append(";")
                     .append(employee.getSalary()).append(";")
-                    .append(System.lineSeparator());
+                    .append(SYSLIN);
         }
         return text.toString();
     }
 
-    public List<Employee> sortedSalary(List<Employee> employeeList) {
+    private List<Employee> sortedSalary(List<Employee> employeeList) {
         employeeList.sort(Comparator.comparingDouble(Employee::getSalary).reversed());
         return employeeList;
     }
