@@ -1,14 +1,17 @@
 package ru.job4j.ood.srp.employeesystem;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * Модель данных - работник
+ * с возможностью сериализации и десиариализации
  *
- * @author Alexey Sapsay
- * @version 1.0
- * @since 15.10.2022
+ * @author Alexey Sapsay (sapsayalexey@gmail.com)
+ * @version 2.0
+ * @since 17.10.2022
  */
 public class Employee {
     private String name;
@@ -21,6 +24,9 @@ public class Employee {
         this.hired = hired;
         this.fired = fired;
         this.salary = salary;
+    }
+
+    public Employee(List<Employee> employeesList) {
     }
 
     public String getName() {

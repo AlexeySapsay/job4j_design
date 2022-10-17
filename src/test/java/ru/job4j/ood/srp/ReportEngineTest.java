@@ -1,9 +1,13 @@
 package ru.job4j.ood.srp;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.srp.employeesystem.*;
 
+import javax.xml.bind.JAXBException;
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static org.assertj.core.api.Assertions.*;
@@ -12,7 +16,7 @@ import static ru.job4j.ood.srp.employeesystem.Constants.*;
 public class ReportEngineTest {
 
     @Test
-    public void whenOldGenerated() {
+    public void whenOldGenerated() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -30,7 +34,7 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenAccountReport() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+    public void whenAccountReport() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -50,7 +54,7 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenITReport() {
+    public void whenITReport() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -77,7 +81,7 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenHRReport() {
+    public void whenHRReport() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker1 = new Employee("Ivan", now, now, 100);
@@ -95,5 +99,50 @@ public class ReportEngineTest {
                 .append(worker1.getSalary()).append(";")
                 .append(SYSLIN);
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
+    }
+
+    @Test
+    public void whenToJSONReport() throws JAXBException {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Gson gson = new GsonBuilder().create();
+        Employee worker = new Employee("Ivan", now, now, 100);
+        store.add(worker);
+        Report engine = new ToJSONReport(store);
+
+        StringBuilder expect = new StringBuilder()
+                .append("[{")
+                .append("\"name\":").append(gson.toJson(worker.getName())).append(",")
+                .append("\"hired\":").append(gson.toJson(worker.getHired())).append(",")
+                .append("\"fired\":").append(gson.toJson(worker.getFired())).append(",")
+                .append("\"salary\":").append(gson.toJson(worker.getSalary())).append("}]");
+        assertThat(engine.generate(employee -> true)).isEqualTo(expect.toString());
+    }
+
+    @Test
+    public void whenToXMLReport() throws JAXBException {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Ivan", now, now, 100);
+        store.add(worker);
+        Report engine = new ToXMLReport(store);
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+
+        String expect = String.format("""
+                        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                        <employees>
+                            <employees>
+                                <fired>%s</fired>
+                                <hired>%s</hired>
+                                <name>%s</name>
+                                <salary>%s</salary>
+                            </employees>
+                        </employees>
+                        """,
+                date.format(worker.getFired().getTime()),
+                date.format(worker.getHired().getTime()),
+                worker.getName(),
+                worker.getSalary());
+        assertThat(engine.generate(employee -> true)).isEqualTo(expect);
     }
 }

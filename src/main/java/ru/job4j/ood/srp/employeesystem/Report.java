@@ -1,5 +1,6 @@
 package ru.job4j.ood.srp.employeesystem;
 
+import javax.xml.bind.JAXBException;
 import java.util.function.Predicate;
 
 /**
@@ -10,5 +11,5 @@ import java.util.function.Predicate;
  * @since 15.10.2022
  */
 public interface Report {
-    String generate(Predicate<Employee> filter);
+    String generate(Predicate<Employee> filter) throws JAXBException;
 }

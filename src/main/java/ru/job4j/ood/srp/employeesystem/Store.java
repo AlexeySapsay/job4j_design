@@ -24,9 +24,11 @@ import java.util.function.Predicate;
  * 2. Имплементируем в каждом классе выше метод из интерфейса Report, generate()
  * С логикой, заданной пользователем данных отчетов.
  *
- * @author Alexey Sapsay
- * @version 1.0
- * @since 15.10.2022
+ * Добавил поддержку XML and JSON
+ *
+ * @author Alexey Sapsay (sapsayalexey@gmail.com)
+ * @version 2.0
+ * @since 17.10.2022
  */
 
 public interface Store {
