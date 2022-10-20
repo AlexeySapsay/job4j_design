@@ -102,13 +102,13 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenToJSONReport() throws JAXBException {
+    public void whenJSONReport() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Gson gson = new GsonBuilder().create();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
-        Report engine = new ToJSONReport(store);
+        Report engine = new JSONReport(store);
 
         StringBuilder expect = new StringBuilder()
                 .append("[{")
@@ -120,12 +120,12 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenToXMLReport() throws JAXBException {
+    public void whenXMLReport() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
-        Report engine = new ToXMLReport(store);
+        Report engine = new XMLReport(store);
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
         String expect = String.format("""

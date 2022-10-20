@@ -14,11 +14,11 @@ import java.util.function.Predicate;
  * @since 17.10.2022
  */
 
-public class ToJSONReport implements Report {
+public class JSONReport implements Report {
     private final Store store;
     private Gson gson;
 
-    public ToJSONReport(Store store) {
+    public JSONReport(Store store) {
         this.store = store;
         try {
             this.gson = new GsonBuilder().create();

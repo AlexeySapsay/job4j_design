@@ -15,12 +15,12 @@ import java.util.function.Predicate;
  * @version 2.0
  * @since 17.10.2022
  */
-public class ToXMLReport implements Report {
+public class XMLReport implements Report {
     private final Store store;
     private final JAXBContext context;
     private final Marshaller marshaller;
 
-    public ToXMLReport(Store store) {
+    public XMLReport(Store store) {
         this.store = store;
         try {
             this.context = JAXBContext.newInstance(Employees.class);
@@ -42,8 +42,8 @@ public class ToXMLReport implements Report {
                         store.findBy(filter)), writer);
                 xml = writer.getBuffer().toString();
             }
-        }  catch (IOException | JAXBException ex) {
-            ex.printStackTrace();
+        }  catch (IOException | JAXBException e) {
+            e.printStackTrace();
         }
         return xml;
     }

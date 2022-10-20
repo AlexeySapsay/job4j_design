@@ -11,5 +11,5 @@ import java.util.function.Predicate;
  * @since 15.10.2022
  */
 public interface Report {
-    String generate(Predicate<Employee> filter) throws JAXBException;
+    String generate(Predicate<Employee> filter);
 }
