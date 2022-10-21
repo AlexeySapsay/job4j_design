@@ -16,7 +16,7 @@ import static ru.job4j.ood.srp.employeesystem.Constants.*;
 public class ReportEngineTest {
 
     @Test
-    public void whenOldGenerated() throws JAXBException {
+    public void whenOldGenerated()  {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -54,7 +54,7 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenITReport() throws JAXBException {
+    public void whenITReport()  {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -81,7 +81,7 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenHRReport() throws JAXBException {
+    public void whenHRReport() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker1 = new Employee("Ivan", now, now, 100);
@@ -102,7 +102,7 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenJSONReport() throws JAXBException {
+    public void whenJSONReport()  {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Gson gson = new GsonBuilder().create();
@@ -120,7 +120,7 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenXMLReport() throws JAXBException {
+    public void whenXMLReport()  {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
