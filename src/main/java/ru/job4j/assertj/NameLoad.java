@@ -1,6 +1,8 @@
 package ru.job4j.assertj;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class NameLoad {

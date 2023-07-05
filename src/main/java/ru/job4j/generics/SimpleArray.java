@@ -1,6 +1,9 @@
 package ru.job4j.generics;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * SimpleArray is an implementation of not dynamic ArrayList

@@ -27,7 +27,7 @@ public class StatementDemo {
      * @param args не используеются в данной задаче
      * @throws Exception кидать случае когда что то пошло не по плану
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         try (Connection connection = getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 String sql = String.format(
@@ -38,6 +38,8 @@ public class StatementDemo {
                 statement.execute(sql);
                 System.out.println(getTableScheme(connection, "demo_table"));
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

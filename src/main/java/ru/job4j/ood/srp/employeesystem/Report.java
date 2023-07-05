@@ -1,6 +1,5 @@
 package ru.job4j.ood.srp.employeesystem;
 
-import javax.xml.bind.JAXBException;
 import java.util.function.Predicate;
 
 /**
